@@ -51,11 +51,18 @@
             </div>
 
             <!-- Endereço com Busca via CEP -->
-            <div class="form-group">
-                <label for="cep">CEP</label>
-                <input type="text" id="cep" name="cep" maxlength="9" required placeholder="00000-000">
-                <span id="cepStatus" class="cep-status"></span>
-            </div>
+            <!-- Input de CEP atualizado para o Angular -->
+<div class="form-group" [formGroup]="cadastroForm">
+    <label for="cep">CEP</label>
+    <input 
+        type="text" 
+        id="cep" 
+        formControlName="cep" 
+        (blur)="buscarCep()" 
+        maxlength="9" 
+        placeholder="00000-000">
+    <span [class]="cepStatusClasse">{{ cepStatusMensagem }}</span>
+</div>
 
             <div class="form-group full-width address-subgrid">
                 <div>
