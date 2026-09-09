@@ -12,7 +12,6 @@
         <h2>Cadastro de Pessoa</h2>
         <p>Preencha os dados abaixo.</p>
       
-      <form [formGroup]="formCadastro" (ngSubmit)="salvar()" class="form-body">
     
     <div class="field-group">
         <label for="nome">Nome Completo </label>
@@ -26,12 +25,25 @@
          placeholder="Ex: seu@email.com" required>
     </div>
 
-
-
-    </form>
-
-     </header>
+    <div class="field-group">
+        <label for="cpf">  CPF </label>
+        <input id="cpf" type="text" formControlName="cpf" mask="000.000.000.00" 
+         placeholder="Ex: 000.000.000.00" required>
     </div>
+    </form>
+     </header>
+
+    </div>
+
+     <div class="field-group">
+        <label for="cep"> CEP</label>
+        <div class="input-wrapper">
+            <input id="cep" type="text" formControlName="cep" mask="00000-000" placeholder="00000-000"
+            [class.is-invalid]="campoInvalido(cep)">
+            <span ></span>
+        </div>
+     </div>
+
     </form>
 </body>
 </html>
