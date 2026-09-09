@@ -1,19 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { PessoaService } from '../services/pessoa.service';
+import { Router } from '@angular/router';
+import { ClienteService } from '../../services/cliente-service'; 
 
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './cadastro.html',
   styleUrl: './cadastro.css'
 })
 export class CadastroComponent {
   private fb = inject(FormBuilder);
-  private pessoaService = inject(PessoaService);
+  private pessoaService = inject(ClienteService);
   private router = inject(Router);
 
   errorMessage: string = '';

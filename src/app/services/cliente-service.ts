@@ -11,34 +11,34 @@ export class ClienteService {
   
     constructor(private http: HttpClient) {}
 }
-    /*listarCorridas(): Observable<Corridas[]> {
+    /*listarCliente(): Observable<Cliente[]> {
             const UrlApi = 'http://127.0.0.1:8000/corrida/'
    
-        return this.http.get<Corridas[]>(UrlApi);
+        return this.http.get<Cliente[]>(UrlApi);
       }
     
-      listarCorrida(id: number): Observable<Corridas> {
-        const UrlApi = `http://127.0.0.1:8000/corrida/${id}`
+      listarCliente(id: number): Observable<Cliente> {
+        const UrlApi = `http://127.0.0.1:8000/Cliente/${id}`
        
-        return this.http.get<Corridas>(UrlApi);
+        return this.http.get<Cliente>(UrlApi);
       }
     
-      salvarCorrida(corrida: Corridas): Observable<Corridas> {
-        const UrlApi = `http://127.0.0.1:8000/corrida/`
+      salvarCliente(Cliente: Cliente): Observable<Cliente> {
+        const UrlApi = `http://127.0.0.1:8000/Cliente/`
         
-        return this.http.post<Corridas>(UrlApi, corrida);
+        return this.http.post<Cliente>(UrlApi, Cliente);
       }
     
-      excluirCorrida(id: number): Observable<Corridas> {
-        const UrlApi = `http://127.0.0.1:8000/corrida/${id}`
+      excluirCliente(id: number): Observable<Cliente> {
+        const UrlApi = `http://127.0.0.1:8000/Cliente/${id}`
         
-        return this.http.delete<Corridas>(UrlApi);
+        return this.http.delete<Cliente>(UrlApi);
       }
     
-      alterarCorrida(corrida: Corridas): Observable<Corridas> {
-        const UrlApi = `http://127.0.0.1:8000/corrida/${corrida.idcorrida}`
+      alterarCliente(Cliente: Cliente): Observable<Cliente> {
+        const UrlApi = `http://127.0.0.1:8000/Cliente/${Cliente.idCliente}`
         
-        return this.http.put<Corridas>(UrlApi, corrida);
+        return this.http.put<Cliente>(UrlApi, Cliente);
       }
     }
 }*/
