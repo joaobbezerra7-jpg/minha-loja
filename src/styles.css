@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+:root {
+    --kabum-blue-primary: #0060B1;
+    --kabum-blue-dark: #003366;
+    --kabum-orange: #FF6500;
+    --kabum-orange-hover: #E05800;
+    --bg-main: #121214;
+    --bg-card: #1F1F23;
+    --bg-card-hover: #2A2A2E;
+    --text-white: #FFFFFF;
+    --text-gray: #A1A1AA;
+    --green-price: #10B981;
+    --border-radius: 4px;
+    --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-white);
+    font-family: var(--font-main);
+    min-height: 100vh;
+    line-height: 1.4;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  button {
+    cursor: pointer;
+    border: none;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
+  }
+  
+  button:active {
+    transform: scale(0.98);
+  }

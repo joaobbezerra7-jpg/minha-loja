@@ -1,8 +1,159 @@
-
-<h1>Aqui vai ser o nome da Loja</h1>
-
-<p>loja works!</p>
-
-
-<p>joao viado</p>
-
+<!-- src/app/app.component.html -->
+<header class="header">
+    <div class="top-bar">
+      <div class="container top-bar-content">
+        <span>🚀 AS MELHORES OFERTAS EM HARDWARE</span>
+        <div class="top-links">
+          <a href="#">Atendimento</a>
+          <a href="#">Meus Pedidos</a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="main-header container">
+      <div class="logo">
+        <span class="logo-text">HARDWARE<span class="logo-orange">STORE</span></span>
+      </div>
+  
+      <div class="search-bar">
+        <input type="text" placeholder="Busque seu componente (ex: RTX 4070, i7, SSD)..." />
+        <button class="btn-search">
+          🔍
+        </button>
+      </div>
+  
+      <div class="user-actions">
+        <div class="action-item">
+          <span class="icon">👤</span>
+          <div class="action-text">
+            <small>Olá, faça seu</small>
+            <strong>Login ou Cadastro</strong>
+          </div>
+        </div>
+  
+        <div class="action-item cart-item">
+          <span class="icon">🛒</span>
+          <span class="cart-badge">0</span>
+        </div>
+      </div>
+    </div>
+  
+    <nav class="category-nav">
+      <div class="container nav-list">
+        <a href="#" class="nav-link highlight">🔥 DESTAQUES</a>
+        <a href="#" class="nav-link">PROCESSADORES</a>
+        <a href="#" class="nav-link">PLACAS DE VÍDEO</a>
+        <a href="#" class="nav-link">MEMÓRIA RAM</a>
+        <a href="#" class="nav-link">ARMAZENAMENTO (SSD/HD)</a>
+        <a href="#" class="nav-link">FONTES E GABINETES</a>
+      </div>
+    </nav>
+  </header>
+  
+  <main class="main-container container">
+    <!-- Onde as páginas do Angular Router serão renderizadas -->
+    <router-outlet></router-outlet>
+  
+    <!-- Vitrine inicial estilizada no padrão KaBuM! -->
+    <section class="products-section">
+      <div class="section-header">
+        <h2>HARDWARE EM PROMOÇÃO</h2>
+        <a href="#" class="view-all">VER TODOS ➔</a>
+      </div>
+  
+      <div class="products-grid">
+        
+        <!-- Card 1 -->
+        <div class="product-card">
+          <span class="discount-badge">-18%</span>
+          <div class="product-image">
+            <span class="img-placeholder">GPU</span>
+          </div>
+          <div class="product-details">
+            <span class="product-brand">NVIDIA</span>
+            <h3 class="product-title">Placa de Vídeo RTX 4070 12GB GDDR6X 192-bit</h3>
+            <div class="price-container">
+              <span class="old-price">R$ 2.235,10</span>
+              <span class="current-price">R$ 1.899,00</span>
+              <span class="payment-method">À vista no PIX com 15% de desconto</span>
+              <span class="installment">ou R$ 1.990,90 em até 10x de R$ 199,09</span>
+            </div>
+            <button class="btn-buy">
+              🛒 COMPRAR
+            </button>
+          </div>
+        </div>
+  
+        <!-- Card 2 -->
+        <div class="product-card">
+          <span class="discount-badge">-25%</span>
+          <div class="product-image">
+            <span class="img-placeholder">CPU</span>
+          </div>
+          <div class="product-details">
+            <span class="product-brand">INTEL</span>
+            <h3 class="product-title">Processador Intel Core i7-13700K, 16-Cores, 24-Threads</h3>
+            <div class="price-container">
+              <span class="old-price">R$ 3.150,50</span>
+              <span class="current-price">R$ 2.650,90</span>
+              <span class="payment-method">À vista no PIX com 15% de desconto</span>
+              <span class="installment">ou R$ 2.899,99 em até 10x de R$ 289,99</span>
+            </div>
+            <button class="btn-buy">
+              🛒 COMPRAR
+            </button>
+          </div>
+        </div>
+  
+        <!-- Card 3 -->
+        <div class="product-card">
+          <span class="discount-badge">-12%</span>
+          <div class="product-image">
+            <span class="img-placeholder">RAM</span>
+          </div>
+          <div class="product-details">
+            <span class="product-brand">KINGSTON</span>
+            <h3 class="product-title">Memória RAM Kingston Fury Beast 16GB DDR5 6000MHz</h3>
+            <div class="price-container">
+              <span class="old-price">R$ 2600,30</span>
+              <span class="current-price">R$ 1450,50</span>
+              <span class="payment-method">À vista no PIX com 15% de desconto</span>
+              <span class="installment">ou R$ 1600,90 em até 10x de R$ 160,09</span>
+            </div>
+            <button class="btn-buy">
+              🛒 COMPRAR
+            </button>
+          </div>
+        </div>
+  
+        <!-- Card 4 -->
+        <div class="product-card">
+          <span class="discount-badge">-30%</span>
+          <div class="product-image">
+            <span class="img-placeholder">SSD</span>
+          </div>
+          <div class="product-details">
+            <span class="product-brand">XPG</span>
+            <h3 class="product-title">SSD 1TB XPG S70 Blade, M.2 NVMe, Leitura 7400MB/s</h3>
+            <div class="price-container">
+              <span class="old-price">R$ 1250,80</span>
+              <span class="current-price">R$ 999,90</span>
+              <span class="payment-method">À vista no PIX com 15% de desconto</span>
+              <span class="installment">ou R$ 1120,95 em até 10x de R$ 112,95</span>
+            </div>
+            <button class="btn-buy">
+              🛒 COMPRAR
+            </button>
+          </div>
+        </div>
+  
+      </div>
+    </section>
+  </main>
+  
+  <footer class="footer">
+    <div class="container footer-content">
+      <p><strong>Loja de Componentes de Hardware</strong> &copy; 2026 - Todos os direitos reservados.</p>
+      <p><small>Preços e condições exclusivos para o site.</small></p>
+    </div>
+  </footer>
