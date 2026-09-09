@@ -1,0 +1,200 @@
+/* ==========================================================================
+   Estilos Gerais e Variaveis Tematicas (Hardware Store)
+   ========================================================================== */
+   :root {
+    --bg-primary: #121214;
+    --bg-card: #202024;
+    --bg-input: #121214;
+    --text-main: #e1e1e6;
+    --text-muted: #a8a8b3;
+    --border-color: #323238;
+    --primary-color: #00875f;
+    --primary-hover: #00b37e;
+    --danger-color: #f75a68;
+    --warning-color: #fba94c;
+    --success-color: #00b37e;
+    --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    --border-radius: 6px;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  /* ==========================================================================
+     Container Principal
+     ========================================================================== */
+  .cadastro-container {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    width: 100%;
+    max-width: 680px;
+    padding: 32px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  }
+  
+  .cadastro-header {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .cadastro-header h2 {
+    font-size: 1.75rem;
+    color: var(--text-main);
+    margin-bottom: 8px;
+  }
+  
+  .cadastro-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  
+  /* ==========================================================================
+     Grids e Grupos do Formulario
+     ========================================================================== */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group.full-width {
+    grid-column: 1 / -1;
+  }
+  
+  .address-subgrid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 16px;
+  }
+  
+  .uf-cidade-grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 16px;
+  }
+  
+  /* ==========================================================================
+     Labels, Inputs e Feedbacks
+     ========================================================================== */
+  label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text-main);
+  }
+  
+  input {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    padding: 12px;
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  input::placeholder {
+    color: #7c7c8a;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 135, 95, 0.2);
+  }
+  
+  /* Status do CEP via Angular binding */
+  .cep-status-loading {
+    font-size: 0.8rem;
+    color: var(--warning-color);
+    margin-top: 4px;
+  }
+  
+  .cep-status-sucesso {
+    font-size: 0.8rem;
+    color: var(--success-color);
+    margin-top: 4px;
+  }
+  
+  .cep-status-erro {
+    font-size: 0.8rem;
+    color: var(--danger-color);
+    margin-top: 4px;
+  }
+  
+  /* ==========================================================================
+     Acoes e Botoes
+     ========================================================================== */
+  .form-actions {
+    margin-top: 16px;
+    text-align: center;
+  }
+  
+  .btn-submit {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: var(--border-radius);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px;
+    width: 100%;
+    transition: background-color 0.2s;
+  }
+  
+  .btn-submit:hover {
+    background-color: var(--primary-hover);
+  }
+  
+  .login-link {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-top: 16px;
+  }
+  
+  .login-link a {
+    color: var(--primary-hover);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* ==========================================================================
+     Responsividade (Mobile)
+     ========================================================================== */
+  @media (max-width: 600px) {
+    .cadastro-container {
+      padding: 20px;
+    }
+  
+    .form-grid,
+    .address-subgrid,
+    .uf-cidade-grid {
+      grid-template-columns: 1fr;
+    }
+  }
