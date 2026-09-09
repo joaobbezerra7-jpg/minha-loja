@@ -1,0 +1,34 @@
+<div class="cadastro-container">
+    <h2>Cadastro de Setor / Categoria</h2>
+  
+    <form [formGroup]="formSetor" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nome">Nome do Setor:</label>
+        <input 
+          id="nome" 
+          type="text" 
+          formControlName="nome" 
+          placeholder="Ex: Processadores, Placas de Vídeo, Memórias RAM"
+          [class.campo-invalido]="formSetor.get('nome')?.touched && formSetor.get('nome')?.invalid"
+        />
+        
+        <div *ngIf="formSetor.get('nome')?.touched && formSetor.get('nome')?.invalid" class="mensagem-erro-campo">
+          <small *ngIf="formSetor.get('nome')?.errors?.['required']">O nome do setor é obrigatório.</small>
+          <small *ngIf="formSetor.get('nome')?.errors?.['minlength']">O nome deve ter no mínimo 2 caracteres.</small>
+          <small *ngIf="formSetor.get('nome')?.errors?.['maxlength']">O nome deve ter no máximo 50 caracteres.</small>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="formSetor.invalid || carregando">
+        {{ carregando ? 'Salvando...' : 'Cadastrar Setor' }}
+      </button>
+    </form>
+  
+    <div *ngIf="mensagemSucesso" class="alerta sucesso">
+      {{ mensagemSucesso }}
+    </div>
+  
+    <div *ngIf="mensagemErro" class="alerta erro">
+      {{ mensagemErro }}
+    </div>
+  </div>
