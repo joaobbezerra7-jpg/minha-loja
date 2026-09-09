@@ -1,0 +1,160 @@
+.carrinho-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.carrinho-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.carrinho-conteudo {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.produtos {
+  flex: 1;
+}
+
+.produto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 25px;
+  margin-bottom: 20px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: white;
+}
+
+.produto-info {
+  flex: 1;
+}
+
+.produto-info h2 {
+  margin: 0 0 8px;
+}
+
+.produto-info p {
+  margin: 0 0 10px;
+  color: #666;
+}
+
+.produto-info span {
+  font-weight: bold;
+}
+
+.quantidade {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quantidade button {
+  width: 35px;
+  height: 35px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.quantidade button:hover {
+  background: #ddd;
+}
+
+.quantidade span {
+  min-width: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.remover {
+  border: none;
+  background: transparent;
+  color: #d00;
+  cursor: pointer;
+}
+
+.remover:hover {
+  text-decoration: underline;
+}
+
+.resumo {
+  width: 320px;
+  padding: 25px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: white;
+}
+
+.resumo h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.linha {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.resumo hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+.finalizar {
+  width: 100%;
+  padding: 14px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: #111;
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.finalizar:hover {
+  background: #333;
+}
+
+@media (max-width: 768px) {
+
+  .carrinho-conteudo {
+    flex-direction: column;
+  }
+
+  .resumo {
+    width: auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .produto {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
