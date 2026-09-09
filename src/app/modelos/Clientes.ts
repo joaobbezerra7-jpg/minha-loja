@@ -6,6 +6,5 @@ export class Cliente{
     telefone:number = 0
     email:string = ''
     senha:string = ''
-    sexo:string = ''
     cep:number = 0
 }
