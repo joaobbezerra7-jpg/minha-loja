@@ -2,7 +2,9 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { ClienteService } from '../../services/cliente-service'; 
+import { ClienteService } from '../services/cliente.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -14,19 +16,20 @@ import { ClienteService } from '../../services/cliente-service';
 export class CadastroComponent {
   private fb = inject(FormBuilder);
   private pessoaService = inject(ClienteService);
+  private clienteService = inject(ClienteService);
   private router = inject(Router);
 
   errorMessage: string = '';
   successMessage: string = '';
-  cepStatusMessage: string = '';
-  cepStatusType: string = '';
+  cepStatusMensagem: string = '';
+  cepStatusClasse: string = '';
   loading: boolean = false;
 
   cadastroForm: FormGroup = this.fb.group({
     nome: ['', [Validators.required, Validators.minLength(3)]],
     cpf: ['', [Validators.required]],
     data_nascimento: ['', [Validators.required]],
-    sexo: ['', [Validators.required]],
+   
     telefone: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     senha: ['', [Validators.required, Validators.minLength(6)]],
@@ -42,16 +45,20 @@ export class CadastroComponent {
     const cepValor = this.cadastroForm.get('cep')?.value || '';
     const cepLimpo = cepValor.replace(/\D/g, '');
 
-    if (cepLimpo.length !== 8) return;
+    if (cepLimpo.length !== 8) {
+      this.cepStatusMensagem = 'CEP inválido.';
+      this.cepStatusClasse = 'status-erro';
+      return;
+    }
 
-    this.cepStatusMessage = 'Buscando endereço...';
-    this.cepStatusType = 'loading';
+    this.cepStatusMensagem = 'Buscando endereço...';
+    this.cepStatusClasse = 'status-carregando';
 
-    this.pessoaService.consultarCep(cepLimpo).subscribe({
+    this.clienteService.consultarCep(cepLimpo).subscribe({
       next: (dados) => {
         if (dados.erro) {
-          this.cepStatusMessage = 'CEP não encontrado.';
-          this.cepStatusType = 'error';
+          this.cepStatusMensagem = 'CEP não encontrado.';
+          this.cepStatusClasse = 'status-erro';
           return;
         }
 
@@ -62,12 +69,12 @@ export class CadastroComponent {
           uf: dados.uf || ''
         });
 
-        this.cepStatusMessage = 'Endereço localizado!';
-        this.cepStatusType = 'success';
+        this.cepStatusMensagem = 'Endereço localizado!';
+        this.cepStatusClasse = 'status-sucesso';
       },
       error: () => {
-        this.cepStatusMessage = 'Erro ao consultar o CEP.';
-        this.cepStatusType = 'error';
+        this.cepStatusMensagem = 'Erro ao consultar o CEP.';
+        this.cepStatusClasse = 'status-erro';
       }
     });
   }
@@ -75,6 +82,7 @@ export class CadastroComponent {
   onSubmit(): void {
     if (this.cadastroForm.invalid) {
       this.cadastroForm.markAllAsTouched();
+      this.errorMessage = 'Preencha todos os campos obrigatórios corretamente.';
       return;
     }
 
@@ -89,18 +97,25 @@ export class CadastroComponent {
       cep: this.cadastroForm.value.cep.replace(/\D/g, '')
     };
 
-    this.pessoaService.cadastrarPessoa(payload).subscribe({
+    this.pessoaService.cadastrarCliente(payload).subscribe({
       next: () => {
         this.loading = false;
         this.successMessage = 'Cadastro realizado com sucesso!';
+        this.cadastroForm.reset({ sexo: 'M' });
+        this.cepStatusMensagem = '';
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err.status === 409 
-          ? 'E-mail ou CPF já cadastrado.' 
-          : 'Falha ao realizar cadastro. Verifique os dados.';
+        if (err.status === 409) {
+          this.errorMessage = 'E-mail ou CPF já cadastrado no sistema.';
+        } else {
+          this.errorMessage = 'Erro ao realizar o cadastro. Verifique os dados enviados.';
+        }
       }
     });
   }
-}
 
+  irParaLogin(): void {
+    this.router.navigate(['/login']);
+  }
+}

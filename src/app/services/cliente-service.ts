@@ -10,35 +10,35 @@ Injectable({
 export class ClienteService {
   
     constructor(private http: HttpClient) {}
-}
-    /*listarCliente(): Observable<Cliente[]> {
-            const UrlApi = 'http://127.0.0.1:8000/corrida/'
+
+     listarClientes(): Observable<Cliente[]> {
+            const UrlApi =  'http://127.0.0.1:8000/pessoa/'
    
         return this.http.get<Cliente[]>(UrlApi);
       }
     
       listarCliente(id: number): Observable<Cliente> {
-        const UrlApi = `http://127.0.0.1:8000/Cliente/${id}`
+        const UrlApi =   `http://127.0.0.1:8000/pessoa/${id}`
        
         return this.http.get<Cliente>(UrlApi);
       }
     
       salvarCliente(Cliente: Cliente): Observable<Cliente> {
-        const UrlApi = `http://127.0.0.1:8000/Cliente/`
+        const UrlApi = 'http://127.0.0.1:8000/pessoa/'
         
         return this.http.post<Cliente>(UrlApi, Cliente);
       }
     
       excluirCliente(id: number): Observable<Cliente> {
-        const UrlApi = `http://127.0.0.1:8000/Cliente/${id}`
+        const UrlApi = `http://127.0.0.1:8000/pessoa/${id}`
         
         return this.http.delete<Cliente>(UrlApi);
       }
     
       alterarCliente(Cliente: Cliente): Observable<Cliente> {
-        const UrlApi = `http://127.0.0.1:8000/Cliente/${Cliente.idCliente}`
+        const UrlApi = `http://127.0.0.1:8000/pessoa/${Cliente.idpessoa}`
         
         return this.http.put<Cliente>(UrlApi, Cliente);
       }
     }
-}*/
+

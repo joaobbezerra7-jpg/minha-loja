@@ -1,10 +1,15 @@
-export class Cliente{
-    id:number = 0
-    nome:string = ''
-    data:string = ''
-    cpf:number = 0
-    telefone:number = 0
-    email:string = ''
-    senha:string = ''
-    cep:number = 0
-}
+export interface Cliente {
+    idpessoa?: number;
+    nome: string;
+    cpf: string;
+    data_nascimento: string;
+    telefone: string;
+    email: string;
+    senha?: string;
+    cep?: string;
+    logradouro?: string;
+    numero?: string;
+    bairro?: string;
+    cidade?: string;
+    uf?: string;
+  }
