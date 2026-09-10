@@ -7,9 +7,8 @@ import {
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ClienteService } from '../../services/cliente-service'; 
 import { HttpClient } from '@angular/common/http';
-
-import { ClienteService } from '../../services/cliente-service';
 
 @Component({
   selector: 'app-cadastro',
@@ -24,6 +23,7 @@ import { ClienteService } from '../../services/cliente-service';
 export class CadastroComponent {
 
   private fb = inject(FormBuilder);
+  private pessoaService = inject(ClienteService);
   private clienteService = inject(ClienteService);
   private router = inject(Router);
   private http = inject(HttpClient);
@@ -276,6 +276,21 @@ export class CadastroComponent {
     };
 
 
+    this.pessoaService.cadastrarCliente(payload).subscribe({
+      next: () => {
+        this.loading = false;
+        this.successMessage = 'Cadastro realizado com sucesso!';
+        this.cadastroForm.reset({ sexo: 'M' });
+        this.cepStatusMensagem = '';
+      },
+      error: (err) => {
+        this.loading = false;
+        if (err.status === 409) {
+          this.errorMessage = 'E-mail ou CPF já cadastrado no sistema.';
+        } else {
+          this.errorMessage = 'Erro ao realizar o cadastro. Verifique os dados enviados.';
+
+
     console.log(
       'Dados enviados para o backend:',
       payload
@@ -334,6 +349,7 @@ export class CadastroComponent {
 
           }
 
+>>>>>>> c83db37950a3cc3a6df61275e33aa8c8b1a6bbd7
         }
 
       });
