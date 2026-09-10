@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { produtos } from './produtos'; 
 
 @Component({
   selector: 'app-produto',
@@ -37,8 +38,7 @@ export class ProdutoComponent {
       // VALOR DO PRODUTO
       valor_unitario: ['', Validators.required],
 
-      // UNIDADE DO PRODUTO
-      unidade: ['', Validators.required],
+      unidade: [''],
 
       // QUANTIDADE EM ESTOQUE
       estoque: ['', Validators.required]
@@ -75,17 +75,21 @@ export class ProdutoComponent {
   // CADASTRA O PRODUTO
   cadastrarProduto(): void {
 
-    // VERIFICA SE O FORMULÁRIO É VÁLIDO
     if (this.formularioProduto.invalid) {
-
-      // MOSTRA OS ERROS DOS CAMPOS
+  
       this.formularioProduto.markAllAsTouched();
-
+  
       return;
     }
-
-    // MOSTRA OS DADOS NO CONSOLE
-    console.log('Produto:', this.formularioProduto.value);
+  
+    produtos.push({
+      ...this.formularioProduto.value,
+      foto: this.fotoPreview
+    });
+  
+    console.log('Produto cadastrado:', produtos);
+  
+    alert('Produto cadastrado com sucesso!');
   }
 
   // VAI PARA A LISTA DE PRODUTOS

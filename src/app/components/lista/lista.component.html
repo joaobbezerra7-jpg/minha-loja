@@ -1,6 +1,6 @@
 <div class="container">
 
-    <h1>Lista de Produtos</h1>
+    <h1>produtos listados</h1>
   
     @for (produto of produtos; track $index) {
   
@@ -30,11 +30,7 @@
           R$ {{ produto.valor_unitario }}
         </p>
   
-        <p>
-          <strong>Unidade:</strong>
-          {{ produto.unidade }}
-        </p>
-  
+       
         <p>
           <strong>Estoque:</strong>
           {{ produto.estoque }}
