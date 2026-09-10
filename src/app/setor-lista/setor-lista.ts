@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { SetorService, Setor } from '../services/setor.service';
+import { SetorService } from '../services/setor.service';
+import { Setor } from '../models/setor';
 
 @Component({
   selector: 'app-setor-lista',
@@ -12,25 +13,21 @@ import { SetorService, Setor } from '../services/setor.service';
 })
 export class SetorListaComponent implements OnInit, OnDestroy {
   setores: Setor[] = [];
-  carregando: boolean = true;
+  carregando: boolean = false;
   mensagemErro: string | null = null;
   private inscricaoSetores!: Subscription;
 
   constructor(private setorService: SetorService) {}
 
   ngOnInit(): void {
-    // Inscreve no fluxo reativo (atualiza a tela em tempo real)
+    this.carregando = true;
     this.inscricaoSetores = this.setorService.setores$.subscribe({
-      next: (dados) => {
+      next: (dados: Setor[]) => {
         this.setores = dados;
         this.carregando = false;
-      }
-    });
-
-    // Busca inicial no backend
-    this.setorService.carregarSetores().subscribe({
-      error: (err) => {
-        this.mensagemErro = 'Não foi possível carregar os setores.';
+      },
+      error: (err: any) => {
+        this.mensagemErro = 'Erro ao carregar a lista de setores.';
         this.carregando = false;
         console.error(err);
       }
@@ -40,6 +37,12 @@ export class SetorListaComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.inscricaoSetores) {
       this.inscricaoSetores.unsubscribe();
+    }
+  }
+
+  excluirSetor(idsetor?: number): void {
+    if (idsetor && confirm('Tem certeza que deseja excluir esta categoria?')) {
+      this.setorService.excluirSetor(idsetor);
     }
   }
 }

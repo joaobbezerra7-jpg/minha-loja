@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { SetorService, Setor } from '../services/setor.service';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { SetorService } from '../services/setor.service';
+import { Setor } from '../models/setor';
 
 @Component({
   selector: 'app-setor-cadastro',
@@ -12,20 +12,25 @@ import { SetorService, Setor } from '../services/setor.service';
   styleUrls: ['./setor-cadastro.component.css']
 })
 export class SetorCadastroComponent implements OnInit {
-  formSetor!: FormGroup;
-  carregando: boolean = false;
+  formSetor: FormGroup;
+  listaSetores: Setor[] = [];
   mensagemSucesso: string | null = null;
-  mensagemErro: string | null = null;
+  
+  // Controle para edição
+  setorEmEdicao: Setor | null = null;
 
   constructor(
     private fb: FormBuilder,
-    private setorService: SetorService,
-    private router: Router
-  ) {}
+    private setorService: SetorService
+  ) {
+    this.formSetor = this.fb.group({
+      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
+    });
+  }
 
   ngOnInit(): void {
-    this.formSetor = this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
+    this.setorService.setores$.subscribe(setores => {
+      this.listaSetores = setores;
     });
   }
 
@@ -35,30 +40,36 @@ export class SetorCadastroComponent implements OnInit {
       return;
     }
 
-    this.carregando = true;
-    this.mensagemSucesso = null;
-    this.mensagemErro = null;
+    const nomeInput = this.formSetor.value.nome;
 
-    const novoSetor: Setor = {
-      nome: this.formSetor.value.nome.trim()
-    };
+    if (this.setorEmEdicao && this.setorEmEdicao.idsetor) {
+      // Modo Edição
+      this.setorService.atualizarSetor(this.setorEmEdicao.idsetor, nomeInput);
+      this.mensagemSucesso = `Setor ID ${this.setorEmEdicao.idsetor} atualizado para "${nomeInput}"!`;
+      this.setorEmEdicao = null;
+    } else {
+      // Modo Cadastro
+      const setorCriado = this.setorService.adicionarSetor(nomeInput);
+      this.mensagemSucesso = `Setor "${setorCriado.nome}" cadastrado! (ID: ${setorCriado.idsetor})`;
+    }
 
-    this.setorService.cadastrarSetor(novoSetor).subscribe({
-      next: (setorCadastrado) => {
-        this.mensagemSucesso = `Setor "${setorCadastrado.nome}" cadastrado com sucesso!`;
-        this.formSetor.reset();
-        this.carregando = false;
+    this.formSetor.reset();
+  }
 
-        // Redireciona automaticamente para a lista após 800ms
-        setTimeout(() => {
-          this.router.navigate(['/setores']);
-        }, 800);
-      },
-      error: (err) => {
-        this.mensagemErro = 'Erro ao cadastrar o setor.';
-        this.carregando = false;
-        console.error(err);
-      }
-    });
+  prepararEdicao(setor: Setor): void {
+    this.setorEmEdicao = setor;
+    this.formSetor.patchValue({ nome: setor.nome });
+  }
+
+  cancelarEdicao(): void {
+    this.setorEmEdicao = null;
+    this.formSetor.reset();
+  }
+
+  excluir(idsetor?: number): void {
+    if (idsetor && confirm('Deseja realmente excluir esta categoria?')) {
+      this.setorService.excluirSetor(idsetor);
+      this.mensagemSucesso = 'Categoria excluída com sucesso!';
+    }
   }
 }
