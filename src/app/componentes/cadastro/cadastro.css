@@ -26,7 +26,7 @@
   body {
     background-color: var(--bg-primary);
     color: var(--text-main);
-    font-family: var(--font-family);
+    font-family: var(--font-family);g
     display: flex;
     justify-content: center;
     align-items: center;
@@ -155,7 +155,7 @@
     background-color: var(--primary-color);
     border: none;
     border-radius: var(--border-radius);
-    color: #ffffff;
+    color: #b56161;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 600;
