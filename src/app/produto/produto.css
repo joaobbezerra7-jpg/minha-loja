@@ -1,0 +1,170 @@
+/* CONTAINER DO FORMULÁRIO (CARD CLARO) */
+.container {
+  max-width: 680px;
+  margin: 40px auto;
+  padding: 36px 40px;
+  background-color: #FFFFFF;
+  border-radius: var(--border-radius);
+  border: 1px solid #E4E4E7;
+  border-top: 5px solid var(--kabum-blue-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* TÍTULO PRINCIPAL */
+h1 {
+  margin-bottom: 6px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #111827;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+/* SUBTÍTULO */
+.subtitulo {
+  margin-bottom: 28px;
+  color: #6B7280;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* GRUPO DE CAMPOS */
+.campo {
+  margin-bottom: 20px;
+}
+
+/* RÓTULOS (LABELS) */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* INPUTS, SELECTS E TEXTAREAS */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  box-sizing: border-box;
+
+  background-color: #F9FAFB;
+  border: 1px solid #D1D5DB;
+  border-radius: var(--border-radius);
+
+  color: #111827;
+  font-size: 14px;
+  font-family: var(--font-main);
+  outline: none;
+
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+/* ESTILIZAÇÃO DO INPUT FILE */
+input[type="file"] {
+  padding: 8px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: var(--kabum-blue-primary);
+  color: #FFFFFF;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 12px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: var(--kabum-blue-dark);
+}
+
+/* PLACEHOLDERS */
+input::placeholder,
+textarea::placeholder {
+  color: #9CA3AF;
+}
+
+/* TEXTAREA */
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* HOVER NOS INPUTS */
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: #9CA3AF;
+}
+
+/* EFEITO DE FOCO (CLICK/SELEÇÃO) */
+input:focus,
+textarea:focus,
+select:focus {
+  background-color: #FFFFFF;
+  border-color: var(--kabum-blue-primary);
+  box-shadow: 0 0 0 3px rgba(0, 96, 177, 0.15);
+}
+
+/* MENSAGEM DE ERRO/VALIDAÇÃO */
+small {
+  display: block;
+  margin-top: 6px;
+  color: #DC2626;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* BOTÃO PRINCIPAL DE AÇÃO */
+button[type="submit"],
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+
+  border: none;
+  border-radius: var(--border-radius);
+
+  background-color: var(--kabum-orange);
+  color: #FFFFFF;
+
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 101, 0, 0.25);
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+/* INTERAÇÕES DO BOTÃO */
+button[type="submit"]:hover,
+.btn-submit:hover {
+  background-color: var(--kabum-orange-hover);
+  box-shadow: 0 6px 16px rgba(224, 88, 0, 0.35);
+}
+
+button[type="submit"]:active,
+.btn-submit:active {
+  transform: scale(0.99);
+}
+
+button:disabled {
+  background-color: #E5E7EB;
+  color: #9CA3AF;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
