@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-produto',
@@ -16,7 +17,10 @@ export class ProdutoComponent {
   // ARMAZENA A FOTO SELECIONADA
   fotoPreview: string = '';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
 
     // CRIA O FORMULÁRIO
     this.formularioProduto = this.formBuilder.group({
@@ -61,7 +65,6 @@ export class ProdutoComponent {
 
         // MOSTRA A FOTO NA TELA
         this.fotoPreview = leitor.result as string;
-
       };
 
       // LÊ A FOTO
@@ -84,4 +87,10 @@ export class ProdutoComponent {
     // MOSTRA OS DADOS NO CONSOLE
     console.log('Produto:', this.formularioProduto.value);
   }
+
+  // VAI PARA A LISTA DE PRODUTOS
+  verProdutos(): void {
+    this.router.navigate(['/lista']);
+  }
+
 }
