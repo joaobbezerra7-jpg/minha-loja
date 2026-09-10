@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Cadastro Pessoa</title>
 </head>
 
@@ -11,13 +12,25 @@
 
     <div class="cadastro-container">
 
+        <!-- ========================================= -->
+        <!-- CABEÇALHO -->
+        <!-- ========================================= -->
+
         <div class="cadastro-header">
+
             <h2>Criar Conta</h2>
-            <p>Preencha os dados abaixo</p>
+
+            <p>
+                Preencha os dados abaixo
+            </p>
+
         </div>
 
 
+        <!-- ========================================= -->
         <!-- FORMULÁRIO ANGULAR -->
+        <!-- ========================================= -->
+
         <form
             id="formCadastro"
             class="form-grid"
@@ -25,12 +38,12 @@
             (ngSubmit)="onSubmit()"
         >
 
-            <!-- =============================== -->
+
+            <!-- ========================================= -->
             <!-- DADOS PESSOAIS -->
-            <!-- =============================== -->
+            <!-- ========================================= -->
 
             <div class="form-group full-width">
-<<<<<<< HEAD
 
                 <label for="nome">
                     Nome Completo
@@ -43,22 +56,13 @@
                     required
                     placeholder="Ex: João Batista"
                 >
-=======
-                <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" name="nome" required placeholder="Ex: João da Silva">
+
             </div>
+
+
+            <!-- CPF -->
 
             <div class="form-group">
-                <label for="cpf">CPF</label>
-                <input type="text" id="cpf" name="cpf" maxlength="14" required placeholder="000.000.000-00">
-            </div>
->>>>>>> 4b7ef5e65e44d309810fef00a0a1aa43c7c3a5f7
-
-            </div>
-
-
-            <div class="form-group">
-<<<<<<< HEAD
 
                 <label for="cpf">
                     CPF
@@ -73,12 +77,10 @@
                     placeholder="000.000.000-00"
                 >
 
-=======
-                <label for="telefone">Telefone</label>
-                <input type="tel" id="telefone" name="telefone" required placeholder="(00) 00000-0000">
->>>>>>> 4b7ef5e65e44d309810fef00a0a1aa43c7c3a5f7
             </div>
 
+
+            <!-- DATA DE NASCIMENTO -->
 
             <div class="form-group">
 
@@ -95,7 +97,8 @@
 
             </div>
 
-<<<<<<< HEAD
+
+            <!-- TELEFONE -->
 
             <div class="form-group">
 
@@ -109,15 +112,17 @@
                     formControlName="telefone"
                     maxlength="11"
                     required
-                    placeholder="(00) 00000-0000"
+                    placeholder="79999999999"
                 >
 
             </div>
 
 
-            <!-- =============================== -->
+            <!-- ========================================= -->
             <!-- DADOS DE ACESSO -->
-            <!-- =============================== -->
+            <!-- ========================================= -->
+
+            <!-- E-MAIL -->
 
             <div class="form-group">
 
@@ -135,6 +140,8 @@
 
             </div>
 
+
+            <!-- SENHA -->
 
             <div class="form-group">
 
@@ -154,9 +161,12 @@
             </div>
 
 
-            <!-- =============================== -->
+            <!-- ========================================= -->
+            <!-- ENDEREÇO -->
+            <!-- ========================================= -->
+
+
             <!-- CEP -->
-            <!-- =============================== -->
 
             <div class="form-group">
 
@@ -170,7 +180,8 @@
                     formControlName="cep"
                     (blur)="buscarCep()"
                     maxlength="8"
-                    placeholder="00000000"
+                    required
+                    placeholder="00000-000"
                 >
 
                 <span [class]="cepStatusClasse">
@@ -180,26 +191,14 @@
             </div>
 
 
-            <!-- =============================== -->
-            <!-- LOGRADOURO E NÚMERO -->
-            <!-- =============================== -->
-=======
-            <!-- Endereço com Busca via CEP -->
-            <!-- Input de CEP atualizado para o Angular -->
-<div class="form-group" [formGroup]="cadastroForm">
-    <label for="cep">CEP</label>
-    <input 
-        type="text" 
-        id="cep" 
-        formControlName="cep" 
-        (blur)="buscarCep()" 
-        maxlength="9" 
-        placeholder="00000-000">
-    <span [class]="cepStatusClasse">{{ cepStatusMensagem }}</span>
-</div>
->>>>>>> 4b7ef5e65e44d309810fef00a0a1aa43c7c3a5f7
+            <!-- ========================================= -->
+            <!-- RUA E NÚMERO -->
+            <!-- ========================================= -->
 
             <div class="form-group full-width address-subgrid">
+
+
+                <!-- LOGRADOURO -->
 
                 <div>
 
@@ -218,6 +217,8 @@
                 </div>
 
 
+                <!-- NÚMERO -->
+
                 <div>
 
                     <label for="numero">
@@ -234,12 +235,13 @@
 
                 </div>
 
+
             </div>
 
 
-            <!-- =============================== -->
+            <!-- ========================================= -->
             <!-- BAIRRO -->
-            <!-- =============================== -->
+            <!-- ========================================= -->
 
             <div class="form-group">
 
@@ -258,11 +260,14 @@
             </div>
 
 
-            <!-- =============================== -->
+            <!-- ========================================= -->
             <!-- UF E CIDADE -->
-            <!-- =============================== -->
+            <!-- ========================================= -->
 
             <div class="form-group uf-cidade-grid">
+
+
+                <!-- UF -->
 
                 <div>
 
@@ -282,6 +287,8 @@
                 </div>
 
 
+                <!-- CIDADE -->
+
                 <div>
 
                     <label for="cidade">
@@ -298,12 +305,13 @@
 
                 </div>
 
+
             </div>
 
 
-            <!-- =============================== -->
-            <!-- MENSAGENS -->
-            <!-- =============================== -->
+            <!-- ========================================= -->
+            <!-- MENSAGEM DE ERRO -->
+            <!-- ========================================= -->
 
             <div
                 class="form-group full-width"
@@ -317,6 +325,10 @@
             </div>
 
 
+            <!-- ========================================= -->
+            <!-- MENSAGEM DE SUCESSO -->
+            <!-- ========================================= -->
+
             <div
                 class="form-group full-width"
                 *ngIf="successMessage"
@@ -329,9 +341,9 @@
             </div>
 
 
-            <!-- =============================== -->
-            <!-- BOTÃO -->
-            <!-- =============================== -->
+            <!-- ========================================= -->
+            <!-- BOTÃO CADASTRAR -->
+            <!-- ========================================= -->
 
             <div class="form-group full-width form-actions">
 
@@ -341,10 +353,18 @@
                     [disabled]="loading"
                 >
 
-                    {{ loading ? 'Cadastrando...' : 'Cadastrar' }}
+                    {{
+                        loading
+                        ? 'Cadastrando...'
+                        : 'Cadastrar'
+                    }}
 
                 </button>
 
+
+                <!-- ========================================= -->
+                <!-- LOGIN -->
+                <!-- ========================================= -->
 
                 <p class="cadastro-link">
 
@@ -360,6 +380,7 @@
                 </p>
 
             </div>
+
 
         </form>
 
