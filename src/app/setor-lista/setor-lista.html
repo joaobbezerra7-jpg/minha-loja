@@ -1,0 +1,30 @@
+<div class="card-lista">
+    <h2>Setores Cadastrados</h2>
+  
+    <div *ngIf="carregando" class="alerta info">
+      Carregando setores...
+    </div>
+  
+    <div *ngIf="mensagemErro && !carregando" class="alerta erro">
+      {{ mensagemErro }}
+    </div>
+  
+    <table *ngIf="!carregando && setores.length > 0" class="tabela-setores">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome do Setor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let setor of setores">
+          <td>{{ setor.idsetor }}</td>
+          <td>{{ setor.nome }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="!carregando && setores.length === 0 && !mensagemErro" class="alerta info">
+      Nenhum setor encontrado.
+    </div>
+  </div>
