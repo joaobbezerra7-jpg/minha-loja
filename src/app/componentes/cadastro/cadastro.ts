@@ -2,8 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { ClienteService } from '../../services/cliente-service'; 
 import { ClienteService } from '../services/cliente.service';
 
 @Component({
@@ -15,7 +13,6 @@ import { ClienteService } from '../services/cliente.service';
 })
 export class CadastroComponent {
   private fb = inject(FormBuilder);
-  private pessoaService = inject(ClienteService);
   private clienteService = inject(ClienteService);
   private router = inject(Router);
 
@@ -97,7 +94,7 @@ export class CadastroComponent {
       cep: this.cadastroForm.value.cep.replace(/\D/g, '')
     };
 
-    this.pessoaService.cadastrarCliente(payload).subscribe({
+    this.clienteService.cadastrarCliente(payload).subscribe({
       next: () => {
         this.loading = false;
         this.successMessage = 'Cadastro realizado com sucesso!';
