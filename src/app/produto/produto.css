@@ -143,37 +143,6 @@ small {
   font-weight: 600;
 }
 
-/* BOTÃO SUBMIT */
-button[type="submit"] {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
-
-  border: none;
-  border-radius: var(--border-radius);
-
-  background-color: var(--kabum-orange);
-  color: #FFFFFF;
-
-  font-size: 15px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(255, 101, 0, 0.25);
-  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
-}
-
-button[type="submit"]:hover {
-  background-color: var(--kabum-orange-hover);
-  box-shadow: 0 6px 16px rgba(224, 88, 0, 0.35);
-}
-
-button[type="submit"]:active {
-  transform: scale(0.99);
-}
-
 .card-header-actions {
   display: flex;
   justify-content: flex-end;
@@ -181,43 +150,42 @@ button[type="submit"]:active {
 }
 
 /* BOTÃO SECUNDÁRIO (VER PRODUTOS) */
+.btn-primary,
 .btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  box-sizing: border-box;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.btn-primary {
+  border: none;
+  background-color: var(--kabum-orange);
+  color: #FFFFFF;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 101, 0, 0.25);
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.btn-secondary {
   background-color: transparent;
   color: var(--kabum-blue-primary);
   border: 1px solid var(--kabum-blue-primary);
-  border-radius: var(--border-radius);
-  font-size: 13px;
-  font-weight: 700;
   text-decoration: none;
-  text-transform: uppercase;
   transition: all 0.2s ease-in-out;
 }
 
 .btn-secondary:hover {
   background-color: var(--kabum-blue-primary);
   color: #FFFFFF;
-}
-
-/* BOTÃO PRINCIPAL */
-.btn-primary {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
-  border: none;
-  border-radius: var(--border-radius);
-  background-color: var(--kabum-orange);
-  color: #FFFFFF;
-  font-size: 15px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(255, 101, 0, 0.25);
-  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
 }
 
 .btn-primary:hover {
