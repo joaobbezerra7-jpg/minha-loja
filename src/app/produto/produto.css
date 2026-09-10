@@ -71,10 +71,10 @@
     font-size: 13px;
   }
   
-  /* BOTÃO */
   button {
     width: 100%;
     padding: 14px;
+    margin-bottom: 10px;
   
     border: none;
     border-radius: 8px;
@@ -97,3 +97,5 @@
   button:active {
     transform: scale(0.98);
   }
+
+  
