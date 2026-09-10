@@ -8,6 +8,7 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './loja.component.html',
   styleUrl: './loja.component.css'
 })
+
 export class LojaComponent {
   title = 'minha-loja'
 }
