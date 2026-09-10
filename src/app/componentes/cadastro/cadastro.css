@@ -1,0 +1,212 @@
+:host {
+  --kabum-blue-primary: #0060B1;
+  --kabum-blue-dark: #003366;
+  --kabum-orange: #FF6500;
+  --kabum-orange-hover: #E05800;
+  --bg-main: #F4F6F9;
+  --bg-card: #FFFFFF;
+  --text-title: #0F172A;
+  --text-body: #334155;
+  --text-muted: #64748B;
+  --input-bg: #F8FAFC;
+  --input-border: #CBD5E1;
+  --green-price: #10B981;
+  --red-error: #EF4444;
+  --border-radius: 8px;
+  --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  font-family: var(--font-main);
+}
+
+/* Container Principal */
+.cadastro-container {
+  background-color: var(--bg-card);
+  width: 100%;
+  max-width: 680px;
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  color: var(--text-body);
+}
+
+/* Cabeçalho */
+.cadastro-header {
+  margin-bottom: 2rem;
+  border-bottom: 3px solid var(--kabum-orange);
+  padding-bottom: 0.75rem;
+}
+
+.cadastro-header h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-title);
+  letter-spacing: -0.5px;
+}
+
+.cadastro-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+/* Grids do Formulário */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.address-subgrid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1.25rem;
+}
+
+.uf-cidade-grid {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1.25rem;
+}
+
+/* Inputs e Labels */
+label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+input {
+  width: 100%;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1rem;
+  color: var(--text-title);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: #94A3B8;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--kabum-blue-primary);
+  box-shadow: 0 0 0 3px rgba(0, 96, 177, 0.15);
+  background-color: #FFFFFF;
+}
+
+/* Mensagens de Feedback */
+.form-group span {
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+}
+
+.status-erro,
+.status-sucesso {
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.status-erro {
+  background-color: #FEF2F2;
+  color: var(--red-error);
+  border: 1px solid #FCA5A5;
+}
+
+.status-sucesso {
+  background-color: #ECFDF5;
+  color: var(--green-price);
+  border: 1px solid #6EE7B7;
+}
+
+/* Ações */
+.form-actions {
+  margin-top: 1rem;
+  gap: 1.25rem;
+}
+
+.btn-submit {
+  width: 100%;
+  background-color: var(--kabum-orange);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: var(--kabum-orange-hover);
+}
+
+.btn-submit:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cadastro-link {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.cadastro-link a {
+  color: var(--kabum-blue-primary);
+  text-decoration: none;
+  font-weight: 700;
+  margin-left: 0.25rem;
+}
+
+.cadastro-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 640px) {
+  .cadastro-container {
+    padding: 1.5rem;
+  }
+
+  .form-grid,
+  .address-subgrid,
+  .uf-cidade-grid {
+    grid-template-columns: 1fr;
+  }
+}

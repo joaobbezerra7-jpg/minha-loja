@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CadastroComponent } from './componentes/cadastro/cadastro';
 import { ProdutoComponent } from './produto/produto';
 
 export const routes: Routes = [
@@ -9,6 +10,12 @@ export const routes: Routes = [
     component: ProdutoComponent
   },
 
+  { path: 'cadastro', component: CadastroComponent },
+  {
+    path: 'cadastro',
+    component: CadastroComponent
+  },
+
   // REDIRECIONA A PÁGINA INICIAL PARA PRODUTO
   {
     path: '',
@@ -17,3 +24,4 @@ export const routes: Routes = [
   }
 
 ]
+

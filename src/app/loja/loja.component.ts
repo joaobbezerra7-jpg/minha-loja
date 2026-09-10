@@ -130,7 +130,3 @@ export class LojaComponent implements OnInit {
     return valorTotal / parcelas;
   }
 }
-
-
-
-;;;;;
