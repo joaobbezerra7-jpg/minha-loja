@@ -2,17 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-<<<<<<< HEAD
-
 import { ClienteService } from '../../services/cliente-service'; 
-import { ClienteService } from '../services/cliente.service';
-=======
-<<<<<<< HEAD
-import { ClienteService } from '../../services/cliente.service';
-=======
-import { ClienteService } from '../../services/cliente-service';
->>>>>>> db43ef717be1c660922055706da3c00d805bd27e
->>>>>>> 0202a0b60f5bbe950b1bed028d25083175fec925
+
 
 @Component({
   selector: 'app-cadastro',
