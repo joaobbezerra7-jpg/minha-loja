@@ -1,1 +1,17 @@
-<router-outlet></router-outlet>
+<header class="navbar-container">
+  <nav class="navbar">
+    <div class="logo">Minha Loja - Hardware</div>
+    <ul class="nav-links">
+      <li>
+        <a routerLink="/cadastro-setor" routerLinkActive="ativo">Cadastrar Setor</a>
+      </li>
+      <li>
+        <a routerLink="/setores" routerLinkActive="ativo">Lista de Setores</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main class="conteudo-principal">
+  <router-outlet></router-outlet>
+</main>

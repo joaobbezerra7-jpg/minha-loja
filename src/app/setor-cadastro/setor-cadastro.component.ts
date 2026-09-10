@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Setor } from '../models/setor';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SetorService, Setor } from '../services/setor.service';
 
 @Component({
   selector: 'app-setor-cadastro',
@@ -10,18 +11,21 @@ import { Setor } from '../models/setor';
   templateUrl: './setor-cadastro.component.html',
   styleUrls: ['./setor-cadastro.component.css']
 })
-export class SetorCadastroComponent {
-  formSetor: FormGroup;
+export class SetorCadastroComponent implements OnInit {
+  formSetor!: FormGroup;
+  carregando: boolean = false;
   mensagemSucesso: string | null = null;
   mensagemErro: string | null = null;
-  carregando: boolean = false;
 
-  // Contador para gerar IDs sequenciais (começa no 1)
-  private proximoId: number = 1;
+  constructor(
+    private fb: FormBuilder,
+    private setorService: SetorService,
+    private router: Router
+  ) {}
 
-  constructor(private fb: FormBuilder) {
+  ngOnInit(): void {
     this.formSetor = this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
+      nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
     });
   }
 
@@ -31,25 +35,30 @@ export class SetorCadastroComponent {
       return;
     }
 
+    this.carregando = true;
     this.mensagemSucesso = null;
     this.mensagemErro = null;
 
-    // Usa o contador sequencial atual
-    const idAtual = this.proximoId;
-
     const novoSetor: Setor = {
-      idsetor: idAtual,
       nome: this.formSetor.value.nome.trim()
     };
 
-    // Incrementa para o próximo cadastro
-    this.proximoId++;
+    this.setorService.cadastrarSetor(novoSetor).subscribe({
+      next: (setorCadastrado) => {
+        this.mensagemSucesso = `Setor "${setorCadastrado.nome}" cadastrado com sucesso!`;
+        this.formSetor.reset();
+        this.carregando = false;
 
-    // Imprime o objeto no console do navegador
-    console.log('Setor cadastrado com sucesso:', novoSetor);
-
-    // Feedback na tela e reseta o formulário
-    this.mensagemSucesso = `Setor "${novoSetor.nome}" cadastrado no console com sucesso! (ID: ${novoSetor.idsetor})`;
-    this.formSetor.reset();
+        // Redireciona automaticamente para a lista após 800ms
+        setTimeout(() => {
+          this.router.navigate(['/setores']);
+        }, 800);
+      },
+      error: (err) => {
+        this.mensagemErro = 'Erro ao cadastrar o setor.';
+        this.carregando = false;
+        console.error(err);
+      }
+    });
   }
 }
