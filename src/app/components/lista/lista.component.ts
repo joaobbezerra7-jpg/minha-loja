@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { produtos } from '../../produto/produtos';
 
 @Component({
   selector: 'app-lista',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './lista.component.css'
 })
 export class ListaComponent {
+
+  produtos = produtos;
 
 }
