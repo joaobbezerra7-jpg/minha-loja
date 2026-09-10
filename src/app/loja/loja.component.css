@@ -140,10 +140,6 @@
     color: var(--kabum-orange);
   }
   
-  .nav-link.highlight {
-    color: #FFD700;
-  }
-  
   /* Vitrine de Produtos */
   .main-container {
     padding-top: 2rem;
