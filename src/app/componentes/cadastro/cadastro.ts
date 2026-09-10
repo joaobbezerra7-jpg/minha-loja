@@ -2,7 +2,11 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+<<<<<<< HEAD
 import { ClienteService } from '../../services/cliente.service';
+=======
+import { ClienteService } from '../../services/cliente-service';
+>>>>>>> db43ef717be1c660922055706da3c00d805bd27e
 
 @Component({
   selector: 'app-cadastro',
@@ -110,8 +114,4 @@ export class CadastroComponent {
       }
     });
   }
-
-  irParaLogin(): void {
-    this.router.navigate(['/login']);
   }
-}
