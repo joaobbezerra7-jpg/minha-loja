@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { SetorService } from '../../services/setor.service';
+import { SetorService } from '../services/setor.service'; // Ajustado de ../.. para ..
+import { Setor } from '../models/setor';
 
 @Component({
   selector: 'app-setor-cadastro',
@@ -35,17 +36,17 @@ export class SetorCadastroComponent {
     this.mensagemSucesso = null;
     this.mensagemErro = null;
 
-    const novoSetor = {
+    const novoSetor: Setor = {
       nome: this.formSetor.value.nome.trim()
     };
 
     this.setorService.criarSetor(novoSetor).subscribe({
-      next: (resposta) => {
+      next: (resposta: Setor) => { // Tipado como Setor
         this.mensagemSucesso = `Setor "${resposta.nome}" cadastrado com sucesso! (ID: ${resposta.idsetor})`;
         this.formSetor.reset();
         this.carregando = false;
       },
-      error: (err) => {
+      error: (err: any) => { // Tipado como any
         this.carregando = false;
         if (err.status === 409) {
           this.mensagemErro = 'Já existe um setor cadastrado com este nome.';
