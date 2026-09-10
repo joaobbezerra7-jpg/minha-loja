@@ -65,7 +65,20 @@ select {
   transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
-/* ESTILIZAÇÃO DO INPUT FILE */
+/* CONFIGURAÇÃO ESPECÍFICA DO SELECT */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%3c0060B1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* ESTILIZAÇÃO DO INPUT FILE E PRÉVIA */
 input[type="file"] {
   padding: 8px;
   background-color: #FFFFFF;
@@ -89,23 +102,27 @@ input[type="file"]::file-selector-button:hover {
   background-color: var(--kabum-blue-dark);
 }
 
-/* PLACEHOLDERS */
+.preview {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.preview img {
+  max-width: 100%;
+  max-height: 180px;
+  border-radius: var(--border-radius);
+  border: 1px solid #E4E4E7;
+}
+
+/* PLACEHOLDERS E TEXTAREA */
 input::placeholder,
 textarea::placeholder {
   color: #9CA3AF;
 }
 
-/* TEXTAREA */
 textarea {
   min-height: 100px;
   resize: vertical;
-}
-
-/* HOVER NOS INPUTS */
-input:hover,
-textarea:hover,
-select:hover {
-  border-color: #9CA3AF;
 }
 
 /* EFEITO DE FOCO (CLICK/SELEÇÃO) */
@@ -117,7 +134,7 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(0, 96, 177, 0.15);
 }
 
-/* MENSAGEM DE ERRO/VALIDAÇÃO */
+/* MENSAGEM DE ERRO */
 small {
   display: block;
   margin-top: 6px;
@@ -126,9 +143,8 @@ small {
   font-weight: 600;
 }
 
-/* BOTÃO PRINCIPAL DE AÇÃO */
-button[type="submit"],
-.btn-submit {
+/* BOTÃO SUBMIT */
+button[type="submit"] {
   width: 100%;
   padding: 14px;
   margin-top: 10px;
@@ -149,22 +165,66 @@ button[type="submit"],
   transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
 }
 
-/* INTERAÇÕES DO BOTÃO */
-button[type="submit"]:hover,
-.btn-submit:hover {
+button[type="submit"]:hover {
   background-color: var(--kabum-orange-hover);
   box-shadow: 0 6px 16px rgba(224, 88, 0, 0.35);
 }
 
-button[type="submit"]:active,
-.btn-submit:active {
+button[type="submit"]:active {
   transform: scale(0.99);
 }
 
-button:disabled {
-  background-color: #E5E7EB;
-  color: #9CA3AF;
-  box-shadow: none;
-  cursor: not-allowed;
-  transform: none;
+.card-header-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+/* BOTÃO SECUNDÁRIO (VER PRODUTOS) */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: var(--kabum-blue-primary);
+  border: 1px solid var(--kabum-blue-primary);
+  border-radius: var(--border-radius);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary:hover {
+  background-color: var(--kabum-blue-primary);
+  color: #FFFFFF;
+}
+
+/* BOTÃO PRINCIPAL */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--kabum-orange);
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 101, 0, 0.25);
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--kabum-orange-hover);
+  box-shadow: 0 6px 16px rgba(224, 88, 0, 0.35);
+}
+
+.btn-primary:active {
+  transform: scale(0.99);
 }

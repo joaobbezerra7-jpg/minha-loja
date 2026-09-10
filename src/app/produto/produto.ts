@@ -1,87 +1,74 @@
-import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+
+export interface Setor {
+  id_setor: number;
+  nome: string;
+}
 
 @Component({
   selector: 'app-produto',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './produto.html',
   styleUrls: ['./produto.css']
 })
-export class ProdutoComponent {
+export class ProdutoComponent implements OnInit {
 
-  // DECLARA O FORMULÁRIO
-  formularioProduto;
-
-  // ARMAZENA A FOTO SELECIONADA
+  formularioProduto: FormGroup;
   fotoPreview: string = '';
 
+  setores: Setor[] = [
+    { id_setor: 1, nome: 'PROCESSADORES' },
+    { id_setor: 2, nome: 'PLACAS DE VÍDEO' },
+    { id_setor: 3, nome: 'MEMÓRIA RAM' },
+    { id_setor: 4, nome: 'ARMAZENAMENTO (SSD/HD)' },
+    { id_setor: 5, nome: 'FONTES E GABINETES' }
+  ];
+
   constructor(private formBuilder: FormBuilder) {
-
-    // CRIA O FORMULÁRIO
     this.formularioProduto = this.formBuilder.group({
-
-      // SETOR DO PRODUTO
       idsetor: ['', Validators.required],
-
-      // NOME DO PRODUTO
       produto: ['', Validators.required],
-
-      // DESCRIÇÃO DO PRODUTO
       descricao_produto: [''],
-
-      // VALOR DO PRODUTO
-      valor_unitario: ['', Validators.required],
-
-      // UNIDADE DO PRODUTO
-      unidade: ['', Validators.required],
-
-      // QUANTIDADE EM ESTOQUE
-      estoque: ['', Validators.required]
-
+      valor_unitario: ['', [Validators.required, Validators.min(0.01)]],
+      unidade: ['UN', Validators.required],
+      estoque: ['', [Validators.required, Validators.min(0)]]
     });
   }
 
-  // SELECIONA A FOTO DO PRODUTO
-  selecionarFoto(event: Event): void {
+  ngOnInit(): void {}
 
-    // PEGA O CAMPO DE ARQUIVO
+  selecionarFoto(event: Event): void {
     const input = event.target as HTMLInputElement;
 
-    // VERIFICA SE UMA FOTO FOI SELECIONADA
     if (input.files && input.files.length > 0) {
-
-      // PEGA A FOTO SELECIONADA
       const arquivo = input.files[0];
-
-      // CRIA UMA PRÉVIA DA FOTO
       const leitor = new FileReader();
 
       leitor.onload = () => {
-
-        // MOSTRA A FOTO NA TELA
         this.fotoPreview = leitor.result as string;
-
       };
 
-      // LÊ A FOTO
       leitor.readAsDataURL(arquivo);
     }
   }
 
-  // CADASTRA O PRODUTO
   cadastrarProduto(): void {
-
-    // VERIFICA SE O FORMULÁRIO É VÁLIDO
     if (this.formularioProduto.invalid) {
-
-      // MOSTRA OS ERROS DOS CAMPOS
       this.formularioProduto.markAllAsTouched();
-
       return;
     }
 
-    // MOSTRA OS DADOS NO CONSOLE
-    console.log('Produto:', this.formularioProduto.value);
+    const payload = {
+      id_setor: Number(this.formularioProduto.value.idsetor),
+      descricao: this.formularioProduto.value.produto,
+      preco_unitario: Number(this.formularioProduto.value.valor_unitario),
+      unidade: this.formularioProduto.value.unidade,
+      estoque: Number(this.formularioProduto.value.estoque)
+    };
+
+    console.log('Payload montado para o backend:', payload);
   }
 }
