@@ -7,14 +7,8 @@ import {
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
-<<<<<<< HEAD
 import { ClienteService } from '../../services/cliente-service'; 
-
-=======
 import { HttpClient } from '@angular/common/http';
-
-import { ClienteService } from '../../services/cliente-service';
->>>>>>> c83db37950a3cc3a6df61275e33aa8c8b1a6bbd7
 
 @Component({
   selector: 'app-cadastro',
@@ -281,7 +275,7 @@ export class CadastroComponent {
 
     };
 
-<<<<<<< HEAD
+
     this.pessoaService.cadastrarCliente(payload).subscribe({
       next: () => {
         this.loading = false;
@@ -295,7 +289,7 @@ export class CadastroComponent {
           this.errorMessage = 'E-mail ou CPF já cadastrado no sistema.';
         } else {
           this.errorMessage = 'Erro ao realizar o cadastro. Verifique os dados enviados.';
-=======
+
 
     console.log(
       'Dados enviados para o backend:',
