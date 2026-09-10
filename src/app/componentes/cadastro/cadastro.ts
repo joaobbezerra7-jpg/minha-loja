@@ -101,7 +101,6 @@ export class CadastroComponent {
       next: () => {
         this.loading = false;
         this.successMessage = 'Cadastro realizado com sucesso!';
-        this.cadastroForm.reset({ sexo: 'M' });
         this.cepStatusMensagem = '';
       },
       error: (err) => {
