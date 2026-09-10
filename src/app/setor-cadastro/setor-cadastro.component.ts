@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { SetorService } from '../services/setor.service'; // Ajustado de ../.. para ..
 import { Setor } from '../models/setor';
 
 @Component({
@@ -17,10 +16,7 @@ export class SetorCadastroComponent {
   mensagemErro: string | null = null;
   carregando: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private setorService: SetorService
-  ) {
+  constructor(private fb: FormBuilder) {
     this.formSetor = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
     });
@@ -32,32 +28,19 @@ export class SetorCadastroComponent {
       return;
     }
 
-    this.carregando = true;
     this.mensagemSucesso = null;
     this.mensagemErro = null;
 
     const novoSetor: Setor = {
+      idsetor: Math.floor(Math.random() * 1000) + 1, // Gera um ID fictício
       nome: this.formSetor.value.nome.trim()
     };
 
-    this.setorService.criarSetor(novoSetor).subscribe({
-      next: (resposta: Setor) => { // Tipado como Setor
-        this.mensagemSucesso = `Setor "${resposta.nome}" cadastrado com sucesso! (ID: ${resposta.idsetor})`;
-        this.formSetor.reset();
-        this.carregando = false;
-      },
-      error: (err: any) => { // Tipado como any
-        this.carregando = false;
-        if (err.status === 409) {
-          this.mensagemErro = 'Já existe um setor cadastrado com este nome.';
-        } else if (err.error?.detail) {
-          this.mensagemErro = typeof err.error.detail === 'string' 
-            ? err.error.detail 
-            : 'Erro de validação nos dados enviados.';
-        } else {
-          this.mensagemErro = 'Não foi possível se conectar ao servidor. Verifique se a API está rodando.';
-        }
-      }
-    });
+    // Imprime o objeto no console do navegador
+    console.log('Setor cadastrado com sucesso:', novoSetor);
+
+    // Feedback na tela e reseta o formulário
+    this.mensagemSucesso = `Setor "${novoSetor.nome}" cadastrado no console com sucesso! (ID: ${novoSetor.idsetor})`;
+    this.formSetor.reset();
   }
 }
