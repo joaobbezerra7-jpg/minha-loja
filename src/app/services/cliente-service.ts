@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Cliente } from '../modelos/Clientes';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+//import { Cliente } from '../modelos/Clientes';
+//import { HttpClient } from '@angular/common/http';
+//import { Observable } from 'rxjs';
 
 
 Injectable({
@@ -9,7 +9,7 @@ Injectable({
   })
 export class ClienteService {
   
-    constructor(private http: HttpClient) {}
+   // constructor(private http: HttpClient) {}
 }
     /*listarCorridas(): Observable<Corridas[]> {
             const UrlApi = 'http://127.0.0.1:8000/corrida/'
