@@ -1,6 +1,38 @@
-<nav class="nav-container">
-    <a routerLink="/cadastro" class="btn-link">Cadastrar Pessoa</a>
-  </nav>
+<header class="header">
+
+    <div class="top-bar">
+      <div class="container top-bar-content">
+        <span>🚀 AS MELHORES OFERTAS EM HARDWARE</span>
   
+        <div class="top-links">
+          <a routerLink="/cadastro-produto" class="nav-link">
+            Cadastrar produto
+          </a>
+        </div>
+      </div>
+    </div>
   
-  <router-outlet></router-outlet>
+    <div class="main-header container">
+  
+      <div class="logo">
+        <span class="logo-text">
+          HARDWARE<span class="logo-orange">STORE</span>
+        </span>
+      </div>
+  
+      <nav class="category-nav">
+        <div class="container nav-list">
+          <a routerLink="/" class="nav-link highlight">Tudo</a>
+          <a routerLink="/" class="nav-link">PROCESSADORES</a>
+          <a routerLink="/" class="nav-link">PLACAS DE VÍDEO</a>
+          <a routerLink="/" class="nav-link">MEMÓRIA RAM</a>
+          <a routerLink="/" class="nav-link">ARMAZENAMENTO</a>
+          <a routerLink="/" class="nav-link">FONTES E GABINETES</a>
+        </div>
+      </nav>
+  
+    </div>
+  
+  </header>
+
+<router-outlet></router-outlet>
