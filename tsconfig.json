@@ -14,7 +14,8 @@
     "target": "ES2022",
     "module": "preserve",
     "moduleResolution": "bundler",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "ignoreDeprecations": "6.0",
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

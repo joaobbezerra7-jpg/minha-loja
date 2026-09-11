@@ -1,0 +1,187 @@
+
+<main class="main-container container">
+
+  <section class="products-section">
+
+    <div class="section-header">
+
+      <h2>
+        HARDWARES
+      </h2>
+
+    </div>
+
+
+    <div class="products-grid">
+
+      @for (
+        produto of produtosExibidos;
+        track produto.idproduto
+      ) {
+
+        <div class="product-card">
+
+          <div class="product-image">
+
+            @if (produto.foto) {
+
+              <img
+                [src]="produto.foto"
+                [alt]="produto.produto"
+              >
+
+            }
+
+            @else {
+
+              <span class="img-placeholder">
+                HARDWARE
+              </span>
+
+            }
+
+          </div>
+
+
+          <div class="product-details">
+
+            <span class="product-brand">
+              HARDWARE
+            </span>
+
+
+            <h3 class="product-title">
+
+              {{ produto.produto }}
+
+            </h3>
+
+
+            @if (produto.descricao_produto) {
+
+              <p class="product-description">
+
+                {{ produto.descricao_produto }}
+
+              </p>
+
+            }
+
+
+            <div class="price-container">
+
+              <span class="current-price">
+
+                R$
+
+                {{
+                  produto.valor_unitario
+                    .toFixed(2)
+                    .replace('.', ',')
+                }}
+
+              </span>
+
+
+              <span class="installment">
+
+                {{ produto.unidade }}
+
+              </span>
+
+            </div>
+
+
+            <div class="stock">
+
+              @if (produto.estoque > 0) {
+
+                <span>
+
+                  Estoque:
+                  {{ produto.estoque }}
+
+                </span>
+
+              }
+
+              @else {
+
+                <span>
+
+                  Produto esgotado
+
+                </span>
+
+              }
+
+            </div>
+
+
+            <button
+
+              class="btn-buy"
+
+              (click)="adicionarAoCarrinho(produto)"
+
+              [disabled]="produto.estoque <= 0"
+
+            >
+
+              🛒 COMPRAR
+
+            </button>
+
+          </div>
+
+        </div>
+
+      }
+
+
+      @if (produtosExibidos.length === 0) {
+
+        <div class="no-products">
+
+          <p>
+            Nenhum produto cadastrado.
+          </p>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="container footer-content">
+
+    <p>
+
+      <strong>
+        Loja de Componentes de Hardware
+      </strong>
+
+      &copy; 2026 - Todos os direitos reservados.
+
+    </p>
+
+
+    <p>
+
+      <small>
+        Preços e condições exclusivos para o site.
+      </small>
+
+    </p>
+
+  </div>
+
+</footer>
+

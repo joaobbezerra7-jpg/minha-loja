@@ -1,71 +1,496 @@
-.cadastro-container {
-    max-width: 500px;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
+/* =========================================================
+   PÁGINA
+   ========================================================= */
+
+.pagina-setor {
+  min-height: calc(100vh - 70px);
+
+  padding: 45px 20px;
+
+  background-color: #f4f6f8;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.container-setor {
+  width: 100%;
+
+  max-width: 1000px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.cabecalho {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  margin-bottom: 25px;
+}
+
+.icone-setor {
+  width: 52px;
+
+  height: 52px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background-color: #111827;
+
+  border-radius: 12px;
+
+  font-size: 25px;
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cabecalho h2 {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 27px;
+
+  font-weight: 700;
+}
+
+.cabecalho p {
+  margin: 5px 0 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   CARD DO FORMULÁRIO
+   ========================================================= */
+
+.card-formulario {
+  background-color: #ffffff;
+
+  padding: 28px;
+
+  border-radius: 12px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.06);
+
+  margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   CAMPO
+   ========================================================= */
+
+.campo {
+  margin-bottom: 20px;
+}
+
+.campo label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #374151;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.campo input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 13px 14px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 8px;
+
+  background-color: #ffffff;
+
+  color: #111827;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.campo input::placeholder {
+  color: #9ca3af;
+}
+
+.campo input:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/* =========================================================
+   BOTÕES DO FORMULÁRIO
+   ========================================================= */
+
+.botoes {
+  display: flex;
+
+  gap: 10px;
+}
+
+.botoes button {
+  padding: 12px 20px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    0.2s;
+}
+
+
+/* BOTÃO PRINCIPAL */
+
+.btn-principal {
+  background-color: #2563eb;
+
+  color: #ffffff;
+}
+
+.btn-principal:hover:not(:disabled) {
+  background-color: #1d4ed8;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.btn-principal:disabled {
+  background-color: #9ca3af;
+
+  cursor: not-allowed;
+}
+
+
+/* BOTÃO CANCELAR */
+
+.btn-cancelar {
+  background-color: #e5e7eb;
+
+  color: #374151;
+}
+
+.btn-cancelar:hover {
+  background-color: #d1d5db;
+}
+
+
+/* =========================================================
+   MENSAGEM DE SUCESSO
+   ========================================================= */
+
+.mensagem-sucesso {
+  margin: 18px 0 0;
+
+  padding: 12px 15px;
+
+  border-radius: 8px;
+
+  background-color: #ecfdf5;
+
+  color: #047857;
+
+  border: 1px solid #a7f3d0;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   CARD DA LISTA
+   ========================================================= */
+
+.card-lista {
+  background-color: #ffffff;
+
+  border-radius: 12px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.06);
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA LISTA
+   ========================================================= */
+
+.lista-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 24px 28px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.lista-header h3 {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 19px;
+}
+
+.lista-header p {
+  margin: 5px 0 0;
+
+  color: #6b7280;
+
+  font-size: 13px;
+}
+
+
+/* CONTADOR */
+
+.contador {
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  background-color: #eff6ff;
+
+  color: #2563eb;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABELA
+   ========================================================= */
+
+.tabela-container {
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #f8fafc;
+}
+
+th {
+  padding: 14px 20px;
+
+  color: #374151;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-align: left;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+td {
+  padding: 16px 20px;
+
+  color: #4b5563;
+
+  font-size: 14px;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+tbody tr {
+  transition:
+    background-color 0.2s;
+}
+
+tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   ID
+   ========================================================= */
+
+.id-setor {
+  display: inline-block;
+
+  padding: 4px 8px;
+
+  border-radius: 6px;
+
+  background-color: #f3f4f6;
+
+  color: #6b7280;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   AÇÕES
+   ========================================================= */
+
+.acoes {
+  display: flex;
+
+  gap: 8px;
+}
+
+.acoes button {
+  padding: 7px 11px;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    0.2s;
+}
+
+
+/* EDITAR */
+
+.btn-editar {
+  border: 1px solid #bfdbfe;
+
+  background-color: #eff6ff;
+
+  color: #2563eb;
+}
+
+.btn-editar:hover {
+  background-color: #dbeafe;
+}
+
+
+/* EXCLUIR */
+
+.btn-excluir {
+  border: 1px solid #fecaca;
+
+  background-color: #fef2f2;
+
+  color: #dc2626;
+}
+
+.btn-excluir:hover {
+  background-color: #fee2e2;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .pagina-setor {
+    padding: 30px 15px;
   }
-  
-  .form-group {
-    margin-bottom: 1.2rem;
-    display: flex;
+
+  .cabecalho h2 {
+    font-size: 22px;
+  }
+
+  .card-formulario {
+    padding: 22px;
+  }
+
+  .lista-header {
+    padding: 20px;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+  .lista-header {
     flex-direction: column;
   }
-  
-  .form-group label {
-    font-weight: 600;
-    margin-bottom: 0.4rem;
+
+  .acoes {
+    flex-direction: column;
   }
-  
-  .form-group input {
-    padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .form-group input.campo-invalido {
-    border-color: #d9534f;
-  }
-  
-  .mensagem-erro-campo {
-    color: #d9534f;
-    margin-top: 0.3rem;
-  }
-  
-  button {
+
+  .acoes button {
     width: 100%;
-    padding: 0.75rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
   }
-  
-  button:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-  }
-  
-  .alerta {
-    margin-top: 1rem;
-    padding: 0.75rem;
-    border-radius: 4px;
-    font-weight: 500;
-  }
-  
-  .alerta.sucesso {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-  }
-  
-  .alerta.erro {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-  }
+
+}
+

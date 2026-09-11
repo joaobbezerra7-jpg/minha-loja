@@ -1,0 +1,217 @@
+
+<div class="carrinho-container">
+
+  <h1>
+    🛒 Meu Carrinho
+  </h1>
+
+
+  <!-- CARRINHO VAZIO -->
+
+  @if (carrinho.length === 0) {
+
+    <div class="carrinho-vazio">
+
+      <h2>
+        Seu carrinho está vazio
+      </h2>
+
+      <p>
+        Adicione produtos à sua compra para continuar.
+      </p>
+
+      <button
+        type="button"
+        (click)="irParaLoja()"
+      >
+        Ver produtos
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- CARRINHO COM PRODUTOS -->
+
+  @else {
+
+    <div class="carrinho-lista">
+
+      @for (
+        item of carrinho;
+        track item.produto.idproduto
+      ) {
+
+        <div class="item-carrinho">
+
+
+          <!-- PRODUTO -->
+
+          <div class="produto-info">
+
+            @if (item.produto.foto) {
+
+              <img
+                [src]="item.produto.foto"
+                [alt]="item.produto.produto"
+              >
+
+            }
+
+            <div>
+
+              <h3>
+                {{ item.produto.produto }}
+              </h3>
+
+              <p>
+
+                R$
+
+                {{
+                  item.produto.valor_unitario
+                    .toFixed(2)
+                    .replace('.', ',')
+                }}
+
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- QUANTIDADE -->
+
+          <div class="quantidade">
+
+            <button
+              type="button"
+              (click)="diminuir(item)"
+            >
+              −
+            </button>
+
+
+            <span>
+              {{ item.quantidade }}
+            </span>
+
+
+            <button
+              type="button"
+              (click)="aumentar(item)"
+            >
+              +
+            </button>
+
+          </div>
+
+
+          <!-- SUBTOTAL -->
+
+          <div class="item-subtotal">
+
+            <strong>
+
+              R$
+
+              {{
+                (
+                  item.produto.valor_unitario *
+                  item.quantidade
+                )
+                  .toFixed(2)
+                  .replace('.', ',')
+              }}
+
+            </strong>
+
+          </div>
+
+
+          <!-- REMOVER -->
+
+          <button
+            type="button"
+            class="btn-remover"
+            (click)="remover(item)"
+          >
+            🗑️
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- RESUMO DO CARRINHO -->
+
+    <div class="resumo-carrinho">
+
+      <h2>
+        Resumo do pedido
+      </h2>
+
+
+      <div class="linha-resumo">
+
+        <span>
+          Subtotal
+        </span>
+
+        <strong>
+
+          R$
+
+          {{
+            subtotal()
+              .toFixed(2)
+              .replace('.', ',')
+          }}
+
+        </strong>
+
+      </div>
+
+
+      <div class="linha-total">
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+
+          R$
+
+          {{
+            total()
+              .toFixed(2)
+              .replace('.', ',')
+          }}
+
+        </strong>
+
+      </div>
+
+
+      <!-- FINALIZAR PEDIDO -->
+
+      <button
+        type="button"
+        class="btn-finalizar"
+        (click)="finalizarPedido()"
+      >
+        Finalizar pedido
+      </button>
+
+    </div>
+
+  }
+
+</div>
+

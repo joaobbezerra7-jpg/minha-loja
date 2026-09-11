@@ -1,6 +1,7 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { produtos } from '../../produto/produtos';
-import { carrinho } from '../../carrinho/carrinho';
+import { produtos } from '../produto/produtos';
+import { carrinho } from '../carrinho/carrinho';
 
 
 @Component({

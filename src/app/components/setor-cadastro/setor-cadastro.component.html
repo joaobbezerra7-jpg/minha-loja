@@ -1,43 +1,188 @@
-<div style="max-width: 600px; margin: 20px auto; font-family: sans-serif;">
-  <h2>{{ setorEmEdicao ? 'Editar Categoria' : 'Cadastro de Setor / Categoria' }}</h2>
 
-  <form [formGroup]="formSetor" (ngSubmit)="onSubmit()" style="margin-bottom: 20px;">
-    <div style="margin-bottom: 10px;">
-      <label>Nome do Setor:</label><br />
-      <input type="text" formControlName="nome" placeholder="Ex: Hardware, Periféricos" style="width: 100%; padding: 8px; margin-top: 4px;" />
+<div class="pagina-setor">
+
+  <div class="container-setor">
+
+    <!-- CABEÇALHO -->
+    <div class="cabecalho">
+
+      <div class="icone-setor">
+        🏷️
+      </div>
+
+      <div>
+        <h2>
+          {{ setorEmEdicao ? 'Editar Categoria' : 'Cadastro de Setor / Categoria' }}
+        </h2>
+
+        <p>
+          Cadastre e gerencie os setores da loja.
+        </p>
+      </div>
+
     </div>
 
-    <button type="submit" [disabled]="formSetor.invalid" style="padding: 8px 16px; cursor: pointer;">
-      {{ setorEmEdicao ? 'Salvar Alteração' : 'Cadastrar Setor' }}
-    </button>
 
-    <button *ngIf="setorEmEdicao" type="button" (click)="cancelarEdicao()" style="margin-left: 8px; padding: 8px 16px; cursor: pointer;">
-      Cancelar
-    </button>
-  </form>
+    <!-- FORMULÁRIO -->
+    <div class="card-formulario">
 
-  <p *ngIf="mensagemSucesso" style="color: green; font-weight: bold;">{{ mensagemSucesso }}</p>
+      <form
+        [formGroup]="formSetor"
+        (ngSubmit)="onSubmit()"
+      >
 
-  <hr />
+        <div class="campo">
 
-  <h3>Categorias Cadastradas</h3>
-  <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-    <thead>
-      <tr style="background-color: #f2f2f2;">
-        <th>ID</th>
-        <th>Nome da Categoria</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let setor of listaSetores">
-        <td>{{ setor.idsetor }}</td>
-        <td>{{ setor.nome }}</td>
-        <td>
-          <button (click)="prepararEdicao(setor)" style="margin-right: 5px; cursor: pointer;">Editar</button>
-          <button (click)="excluir(setor.idsetor)" style="color: red; cursor: pointer;">Excluir</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <label for="nome">
+            Nome do Setor
+          </label>
+
+          <input
+            id="nome"
+            type="text"
+            formControlName="nome"
+            placeholder="Ex: Hardware, Periféricos"
+          >
+
+        </div>
+
+
+        <!-- BOTÕES -->
+        <div class="botoes">
+
+          <button
+            type="submit"
+            class="btn-principal"
+            [disabled]="formSetor.invalid"
+          >
+            {{ setorEmEdicao ? 'Salvar Alteração' : 'Cadastrar Setor' }}
+          </button>
+
+
+          <button
+            *ngIf="setorEmEdicao"
+            type="button"
+            class="btn-cancelar"
+            (click)="cancelarEdicao()"
+          >
+            Cancelar
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <!-- MENSAGEM -->
+      <p
+        *ngIf="mensagemSucesso"
+        class="mensagem-sucesso"
+      >
+        ✓ {{ mensagemSucesso }}
+      </p>
+
+    </div>
+
+
+    <!-- LISTA -->
+    <div class="card-lista">
+
+      <div class="lista-header">
+
+        <div>
+
+          <h3>
+            Categorias Cadastradas
+          </h3>
+
+          <p>
+            Setores disponíveis para os produtos da loja.
+          </p>
+
+        </div>
+
+        <span class="contador">
+          {{ listaSetores.length }}
+          {{ listaSetores.length === 1 ? 'setor' : 'setores' }}
+        </span>
+
+      </div>
+
+
+      <!-- TABELA -->
+      <div class="tabela-container">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>ID</th>
+
+              <th>
+                Nome da Categoria
+              </th>
+
+              <th>
+                Ações
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            <tr *ngFor="let setor of listaSetores">
+
+              <td>
+                <span class="id-setor">
+                  #{{ setor.idsetor }}
+                </span>
+              </td>
+
+              <td>
+                <strong>
+                  {{ setor.nome }}
+                </strong>
+              </td>
+
+              <td>
+
+                <div class="acoes">
+
+                  <button
+                    class="btn-editar"
+                    (click)="prepararEdicao(setor)"
+                  >
+                    ✏️ Editar
+                  </button>
+
+
+                  <button
+                    class="btn-excluir"
+                    (click)="excluir(setor.idsetor)"
+                  >
+                    🗑️ Excluir
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
+

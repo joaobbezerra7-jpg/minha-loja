@@ -1,4 +1,6 @@
+
 import { Component, inject } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 
 import {
@@ -9,6 +11,7 @@ import {
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
+
 import { HttpClient } from '@angular/common/http';
 
 import { ClienteService } from '../../services/cliente-service';
@@ -17,19 +20,16 @@ import { ClienteService } from '../../services/cliente-service';
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
-
   templateUrl: './cadastro.html',
   styleUrl: './cadastro.css'
 })
 
 
 export class CadastroComponent {
-
 
   private fb = inject(FormBuilder);
 
@@ -158,12 +158,10 @@ export class CadastroComponent {
 
   buscarCep(): void {
 
-
     const cepValor =
       this.cadastroForm
         .get('cep')
         ?.value || '';
-
 
     const cepLimpo =
       cepValor.replace(/\D/g, '');
@@ -180,7 +178,6 @@ export class CadastroComponent {
         'status-erro';
 
       return;
-
     }
 
 
@@ -196,15 +193,12 @@ export class CadastroComponent {
     // =====================================================
 
     this.http
-
       .get<any>(
         `https://viacep.com.br/ws/${cepLimpo}/json/`
       )
-
       .subscribe({
 
         next: (dados: any) => {
-
 
           console.log(
             'Resposta da ViaCEP:',
@@ -223,7 +217,6 @@ export class CadastroComponent {
               'status-erro';
 
             return;
-
           }
 
 
@@ -264,7 +257,6 @@ export class CadastroComponent {
 
         error: (err: any) => {
 
-
           console.error(
             'Erro ao consultar ViaCEP:',
             err
@@ -290,7 +282,6 @@ export class CadastroComponent {
 
   onSubmit(): void {
 
-
     console.log(
       '================================='
     );
@@ -310,7 +301,6 @@ export class CadastroComponent {
 
     if (this.cadastroForm.invalid) {
 
-
       console.log(
         'Formulário inválido.'
       );
@@ -324,7 +314,6 @@ export class CadastroComponent {
 
 
       return;
-
     }
 
 
@@ -334,19 +323,15 @@ export class CadastroComponent {
 
     const payload = {
 
-
       ...this.cadastroForm.value,
-
 
       cpf:
         this.cadastroForm.value.cpf
           .replace(/\D/g, ''),
 
-
       telefone:
         this.cadastroForm.value.telefone
           .replace(/\D/g, ''),
-
 
       cep:
         this.cadastroForm.value.cep
@@ -356,31 +341,18 @@ export class CadastroComponent {
 
 
     console.log(
-      'DADOS QUE SERÃO ENVIADOS:',
+      'DADOS DO CADASTRO:',
       payload
     );
 
 
     // =====================================================
-    // LIMPAR FORMULÁRIO
+    // LIMPAR MENSAGENS
     // =====================================================
-
-    this.cadastroForm.reset();
-
-
-    this.cepStatusMensagem = '';
-
-    this.cepStatusClasse = '';
 
     this.errorMessage = '';
 
-    this.successMessage =
-      'Cadastro enviado.';
-
-
-    console.log(
-      'FORMULÁRIO LIMPO.'
-    );
+    this.successMessage = '';
 
 
     // =====================================================
@@ -391,21 +363,69 @@ export class CadastroComponent {
 
 
     // =====================================================
-    // ENVIAR PARA FASTAPI
+    // MOCK TEMPORÁRIO
+    // =====================================================
+
+    console.log(
+      '================================='
+    );
+
+    console.log(
+      'CADASTRO MOCKADO'
+    );
+
+    console.log(
+      'Dados recebidos pelo frontend:'
+    );
+
+    console.log(
+      payload
+    );
+
+    console.log(
+      '================================='
+    );
+
+
+    // Simula uma resposta bem-sucedida
+
+    setTimeout(() => {
+
+      this.loading = false;
+
+
+      this.successMessage =
+        'Cadastro realizado com sucesso!';
+
+
+      // Limpar formulário
+
+      this.cadastroForm.reset();
+
+      this.cepStatusMensagem = '';
+
+      this.cepStatusClasse = '';
+
+
+      // Ir para a loja
+
+      this.router.navigate([
+        '/loja'
+      ]);
+
+    }, 500);
+
+
+    /*
+    // =====================================================
+    // FUTURA INTEGRAÇÃO COM FASTAPI
     // =====================================================
 
     this.clienteService
-
       .salvarCliente(payload)
-
       .subscribe({
 
-        // ===============================================
-        // SUCESSO
-        // ===============================================
-
         next: (resposta: any) => {
-
 
           console.log(
             '================================='
@@ -430,15 +450,18 @@ export class CadastroComponent {
           this.successMessage =
             'Cadastro realizado com sucesso!';
 
+
+          this.cadastroForm.reset();
+
+
+          this.router.navigate([
+            '/loja'
+          ]);
+
         },
 
 
-        // ===============================================
-        // ERRO
-        // ===============================================
-
         error: (err: any) => {
-
 
           console.error(
             '================================='
@@ -468,33 +491,26 @@ export class CadastroComponent {
 
           if (err.status === 409) {
 
-
             this.errorMessage =
               'E-mail ou CPF já cadastrado no sistema.';
-
 
           }
 
           else if (err.status === 422) {
 
-
             this.errorMessage =
               'Os dados enviados não estão no formato esperado pelo servidor.';
-
 
           }
 
           else if (err.status === 0) {
 
-
             this.errorMessage =
               'Não foi possível conectar ao FastAPI.';
-
 
           }
 
           else {
-
 
             this.errorMessage =
               'Erro ao realizar o cadastro.';
@@ -504,6 +520,7 @@ export class CadastroComponent {
         }
 
       });
+    */
 
   }
 
@@ -513,7 +530,6 @@ export class CadastroComponent {
   // =========================================================
 
   irParaLogin(): void {
-
 
     this.router.navigate([
       '/login'
