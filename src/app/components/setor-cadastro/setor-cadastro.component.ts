@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { SetorService } from '../services/setor.service';
-import { Setor } from '../models/setor';
+import { SetorService } from '../../services/setor.service';
+import { Setor } from '../../models/setor';
 
 @Component({
   selector: 'app-setor-cadastro',

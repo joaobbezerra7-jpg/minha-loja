@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { SetorService } from '../services/setor.service';
-import { Setor } from '../models/setor';
+import { SetorService } from '../../services/setor.service';
+import { Setor } from '../../models/setor';
 
 @Component({
   selector: 'app-setor-lista',

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { SetorCadastroComponent } from './setor-cadastro/setor-cadastro.component';
-import {  } from "./produto/produto";
+import { SetorCadastroComponent } from './components/setor-cadastro/setor-cadastro.component';
+import {  } from "./components/produto/produto";
 
 export const routes: Routes = [
 
