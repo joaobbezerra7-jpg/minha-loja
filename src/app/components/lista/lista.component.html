@@ -1,0 +1,43 @@
+<div class="container">
+
+    <h1>produtos listados</h1>
+  
+    @for (produto of produtos; track $index) {
+  
+      <div class="produto">
+  
+        @if (produto.foto) {
+          <img
+            [src]="produto.foto"
+            alt="Foto do produto"
+          >
+        }
+  
+        <h2>{{ produto.produto }}</h2>
+  
+        <p>
+          <strong>Setor:</strong>
+          {{ produto.idsetor }}
+        </p>
+  
+        <p>
+          <strong>Descrição:</strong>
+          {{ produto.descricao_produto }}
+        </p>
+  
+        <p>
+          <strong>Valor unitário:</strong>
+          R$ {{ produto.valor_unitario }}
+        </p>
+  
+       
+        <p>
+          <strong>Estoque:</strong>
+          {{ produto.estoque }}
+        </p>
+  
+      </div>
+  
+    }
+  
+  </div>
