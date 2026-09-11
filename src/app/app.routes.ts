@@ -1,26 +1,21 @@
 import { Routes } from '@angular/router';
-
 import { ProdutoComponent } from './produto/produto';
 import { SetorCadastroComponent } from './components/setor-cadastro/setor-cadastro.component';
 import { ListaComponent } from './components/lista/lista.component';
 
 export const routes: Routes = [
 
-  // ROTA PARA CADASTRAR PRODUTOS
+  // ROTA PARA A ENTRADA DE PRODUTOS
   {
-    path: './produto/produto',
+    path: 'produto',
     component: ProdutoComponent
   },
 
-  {
-    path: 'lista',
-    component: ListaComponent
-  },
-
+  // REDIRECIONA A PÁGINA INICIAL PARA PRODUTO
   {
     path: '',
     redirectTo: 'produto',
     pathMatch: 'full'
   }
 
-];
+]

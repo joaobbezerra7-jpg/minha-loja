@@ -1,50 +1,74 @@
-.navbar-container {
-    background-color: #343a40;
-    padding: 0.8rem 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .navbar {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo {
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 1.1rem;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .nav-links a {
-    color: #ced4da;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-  }
-  
-  .nav-links a:hover {
-    color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .nav-links a.ativo {
-    color: #ffffff;
-    background-color: #0d6efd;
-  }
-  
-  .conteudo-principal {
-    padding: 1rem;
-  }
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* HEADER */
+
+.header {
+  background-color: var(--kabum-blue-primary);
+  border-bottom: 4px solid var(--kabum-orange);
+}
+
+.top-bar {
+  background-color: var(--kabum-blue-dark);
+  font-size: 0.75rem;
+  padding: 0.3rem 0;
+  color: var(--text-gray);
+}
+
+.top-bar-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-links a {
+  margin-left: 1rem;
+}
+
+.top-links a:hover {
+  color: var(--text-white);
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  gap: 1.5rem;
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -1px;
+}
+
+.logo-orange {
+  color: var(--kabum-orange);
+}
+
+.category-nav {
+  background-color: var(--kabum-blue-dark);
+}
+
+.nav-list {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--text-white);
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--kabum-orange);
+}
