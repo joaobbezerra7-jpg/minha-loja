@@ -6,55 +6,109 @@
 
     <div class="produtos">
 
-      <div class="produto">
+      @if (carrinho.length === 0) {
 
-        <div class="produto-info">
-          <h2>Produto de exemplo</h2>
-          <p>Descrição do produto</p>
-          <span>R$ 100,00</span>
+        <div class="produto">
+          <div class="produto-info">
+            <h2>Seu carrinho está vazio</h2>
+            <p>Adicione produtos para continuar.</p>
+          </div>
         </div>
 
-        <div class="quantidade">
+      } @else {
 
-          <button type="button">−</button>
+        @for (item of carrinho; track $index) {
 
-          <span>1</span>
+          <div class="produto">
 
-          <button type="button">+</button>
+            <div class="produto-info">
 
-        </div>
+              <h2>
+                {{ item.produto.produto }}
+              </h2>
 
-        <button class="remover" type="button">
-          Remover
-        </button>
+              <p>
+                {{ item.produto.descricao_produto }}
+              </p>
 
-      </div>
+              <span>
+                R$ {{ item.produto.valor_unitario }}
+              </span>
+
+            </div>
+
+            <div class="quantidade">
+
+              <button
+                type="button"
+                (click)="diminuir(item)">
+                −
+              </button>
+
+              <span>
+                {{ item.quantidade }}
+              </span>
+
+              <button
+                type="button"
+                (click)="aumentar(item)">
+                +
+              </button>
+
+            </div>
+
+            <button
+              class="remover"
+              type="button"
+              (click)="remover(item)">
+              Remover
+            </button>
+
+          </div>
+
+        }
+
+      }
 
     </div>
-
 
     <div class="resumo">
 
       <h2>Resumo do pedido</h2>
 
       <div class="linha">
+
         <span>Subtotal</span>
-        <span>R$ 100,00</span>
+
+        <span>
+          R$ {{ subtotal().toFixed(2) }}
+        </span>
+
       </div>
 
       <div class="linha">
+
         <span>Frete</span>
+
         <span>Grátis</span>
+
       </div>
 
       <hr>
 
       <div class="total">
+
         <span>Total</span>
-        <strong>R$ 100,00</strong>
+
+        <strong>
+          R$ {{ subtotal().toFixed(2) }}
+        </strong>
+
       </div>
 
-      <button class="finalizar" type="button">
+      <button
+        class="finalizar"
+        type="button">
         Finalizar pedido
       </button>
 

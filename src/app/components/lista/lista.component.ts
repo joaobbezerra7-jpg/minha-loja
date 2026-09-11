@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { produtos } from '../../produto/produtos';
+import { carrinho } from '../../carrinho/carrinho';
 
 @Component({
   selector: 'app-lista',
@@ -11,5 +14,34 @@ import { produtos } from '../../produto/produtos';
 export class ListaComponent {
 
   produtos = produtos;
+
+  constructor(private router: Router) {}
+
+  adicionarAoCarrinho(produto: any): void {
+
+    const produtoExistente = carrinho.find(
+      item => item.produto === produto
+    );
+
+    if (produtoExistente) {
+
+      produtoExistente.quantidade++;
+
+    } else {
+
+      carrinho.push({
+        produto: produto,
+        quantidade: 1
+      });
+
+    }
+
+    alert('Produto adicionado ao carrinho!');
+
+  }
+
+  verCarrinho(): void {
+    this.router.navigate(['/carrinho']);
+  }
 
 }
