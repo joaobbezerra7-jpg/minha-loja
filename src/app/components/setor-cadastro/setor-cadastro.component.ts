@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { SetorService } from '../../services/setor.service';
 import { Setor } from '../../models/setor';
 
@@ -9,67 +13,142 @@ import { Setor } from '../../models/setor';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './setor-cadastro.component.html',
-  styleUrls: ['./setor-cadastro.component.css']
+  styleUrl: './setor-cadastro.component.css'
 })
-export class SetorCadastroComponent implements OnInit {
-  formSetor: FormGroup;
+export class SetorCadastroComponent {
+
   listaSetores: Setor[] = [];
-  mensagemSucesso: string | null = null;
-  
-  // Controle para edição
-  setorEmEdicao: Setor | null = null;
+
+  setorEmEdicao: number | null = null;
+
+  mensagemSucesso = '';
+  mensagemErro = '';
+
+  formSetor: any;
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private setorService: SetorService
   ) {
-    this.formSetor = this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
-    });
-  }
 
-  ngOnInit(): void {
-    this.setorService.setores$.subscribe(setores => {
-      this.listaSetores = setores;
+    this.formSetor = this.formBuilder.group({
+      nome: ['', [
+        Validators.required,
+        Validators.minLength(2)
+      ]]
     });
+
+    this.atualizarLista();
   }
 
   onSubmit(): void {
+
     if (this.formSetor.invalid) {
       this.formSetor.markAllAsTouched();
       return;
     }
 
-    const nomeInput = this.formSetor.value.nome;
+    const nome = this.formSetor.value.nome?.trim();
 
-    if (this.setorEmEdicao && this.setorEmEdicao.idsetor) {
-      // Modo Edição
-      this.setorService.atualizarSetor(this.setorEmEdicao.idsetor, nomeInput);
-      this.mensagemSucesso = `Setor ID ${this.setorEmEdicao.idsetor} atualizado para "${nomeInput}"!`;
+    if (!nome) {
+      return;
+    }
+
+    if (this.setorEmEdicao !== null) {
+
+      this.setorService.atualizarSetor(
+        this.setorEmEdicao,
+        nome
+      );
+
+      this.mensagemSucesso =
+        'Setor atualizado com sucesso!';
+
       this.setorEmEdicao = null;
+
     } else {
-      // Modo Cadastro
-      const setorCriado = this.setorService.adicionarSetor(nomeInput);
-      this.mensagemSucesso = `Setor "${setorCriado.nome}" cadastrado! (ID: ${setorCriado.idsetor})`;
+
+      this.setorService.adicionarSetor(nome);
+
+      this.mensagemSucesso =
+        'Setor cadastrado com sucesso!';
     }
 
     this.formSetor.reset();
+
+    this.atualizarLista();
+
+    setTimeout(() => {
+      this.mensagemSucesso = '';
+    }, 3000);
   }
 
   prepararEdicao(setor: Setor): void {
-    this.setorEmEdicao = setor;
-    this.formSetor.patchValue({ nome: setor.nome });
+
+    if (setor.idsetor === undefined) {
+      return;
+    }
+
+    this.setorEmEdicao = setor.idsetor;
+
+    this.formSetor.patchValue({
+      nome: setor.nome
+    });
+
+    this.mensagemSucesso = '';
+    this.mensagemErro = '';
   }
 
   cancelarEdicao(): void {
+
     this.setorEmEdicao = null;
+
     this.formSetor.reset();
+
+    this.mensagemSucesso = '';
+    this.mensagemErro = '';
   }
 
-  excluir(idsetor?: number): void {
-    if (idsetor && confirm('Deseja realmente excluir esta categoria?')) {
-      this.setorService.excluirSetor(idsetor);
-      this.mensagemSucesso = 'Categoria excluída com sucesso!';
+  excluir(idsetor: number | undefined): void {
+
+    if (idsetor === undefined) {
+      return;
     }
+
+    const setor = this.listaSetores.find(
+      item => item.idsetor === idsetor
+    );
+
+    if (!setor) {
+      return;
+    }
+
+    const confirmar = confirm(
+      `Deseja realmente excluir o setor "${setor.nome}"?`
+    );
+
+    if (!confirmar) {
+      return;
+    }
+
+    this.setorService.excluirSetor(idsetor);
+
+    if (this.setorEmEdicao === idsetor) {
+      this.cancelarEdicao();
+    }
+
+    this.atualizarLista();
+
+    this.mensagemSucesso =
+      'Setor excluído com sucesso!';
+
+    setTimeout(() => {
+      this.mensagemSucesso = '';
+    }, 3000);
+  }
+
+  private atualizarLista(): void {
+    this.listaSetores =
+      this.setorService.getSetores();
   }
 }

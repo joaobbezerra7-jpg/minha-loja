@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
@@ -7,52 +6,24 @@ import { FormsModule } from '@angular/forms';
 
 import { RouterLink } from '@angular/router';
 
-import { produtos as produtosCadastrados } from '../produto/produtos';
-
 import { carrinho } from '../carrinho/carrinho';
 
-
-export interface Produto {
-
-  idproduto?: number;
-
-  idsetor?: number;
-
-  produto: string;
-
-  descricao_produto?: string;
-
-  valor_unitario: number;
-
-  unidade: string;
-
-  estoque: number;
-
-  foto?: string;
-
-}
+import {
+  Produto,
+  ProdutoService
+} from '../../services/produto-service';
 
 
 @Component({
-
   selector: 'app-loja',
-
   standalone: true,
-
   imports: [
-
     CommonModule,
-
     FormsModule,
-
     RouterLink
-
   ],
-
   templateUrl: './loja.component.html',
-
   styleUrls: ['./loja.component.css']
-
 })
 
 
@@ -67,19 +38,43 @@ export class LojaComponent implements OnInit {
   produtosExibidos: Produto[] = [];
 
 
+  constructor(
+    private produtoService: ProdutoService
+  ) {}
+
+
   ngOnInit(): void {
 
-    this.produtos = produtosCadastrados;
+    this.produtoService
+      .listarProdutos()
+      .subscribe({
 
-    this.produtosExibidos = [
+        next: (produtos) => {
 
-      ...this.produtos
+          console.log(
+            'Produtos recebidos do FastAPI na Loja:',
+            produtos
+          );
 
-    ];
+          this.produtos = produtos;
+
+          this.produtosExibidos = [...produtos];
+
+        },
+
+        error: (err) => {
+
+          console.error(
+            'Erro ao buscar produtos para a Loja:',
+            err
+          );
+
+        }
+
+      });
 
 
     // Atualiza a quantidade do carrinho
-
     this.atualizarQuantidadeCarrinho();
 
   }
@@ -92,20 +87,15 @@ export class LojaComponent implements OnInit {
   executarBusca(): void {
 
     const termo =
-
       this.termoBusca
-
         .trim()
-
         .toLowerCase();
 
 
     if (!termo) {
 
       this.produtosExibidos = [
-
         ...this.produtos
-
       ];
 
       return;
@@ -114,21 +104,16 @@ export class LojaComponent implements OnInit {
 
 
     this.produtosExibidos =
-
       this.produtos.filter(produto =>
 
         produto.produto
-
           .toLowerCase()
-
           .includes(termo)
 
         ||
 
         produto.descricao_produto
-
           ?.toLowerCase()
-
           .includes(termo)
 
       );
@@ -143,11 +128,8 @@ export class LojaComponent implements OnInit {
   adicionarAoCarrinho(produto: Produto): void {
 
     const produtoExistente =
-
       carrinho.find(
-
         item => item.produto === produto
-
       );
 
 
@@ -174,9 +156,7 @@ export class LojaComponent implements OnInit {
 
 
     alert(
-
       'Produto adicionado ao carrinho!'
-
     );
 
   }
@@ -189,11 +169,9 @@ export class LojaComponent implements OnInit {
   atualizarQuantidadeCarrinho(): void {
 
     this.quantidadeCarrinho =
-
       carrinho.reduce(
 
         (total, item) =>
-
           total + item.quantidade,
 
         0
@@ -220,4 +198,3 @@ export class LojaComponent implements OnInit {
   }
 
 }
-

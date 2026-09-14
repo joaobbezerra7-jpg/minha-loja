@@ -1,7 +1,13 @@
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
-import { produtos } from '../produto/produtos';
+
+import { Component, OnInit } from '@angular/core';
+
 import { carrinho } from '../carrinho/carrinho';
+
+import {
+  Produto,
+  ProdutoService
+} from '../../services/produto-service';
 
 
 @Component({
@@ -11,13 +17,46 @@ import { carrinho } from '../carrinho/carrinho';
   templateUrl: './lista.component.html',
   styleUrl: './lista.component.css'
 })
-export class ListaComponent {
+export class ListaComponent implements OnInit {
 
-  produtos = produtos;
+  produtos: Produto[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private produtoService: ProdutoService
+  ) {}
 
-  adicionarAoCarrinho(produto: any): void {
+  ngOnInit(): void {
+
+    this.produtoService
+      .listarProdutos()
+      .subscribe({
+
+        next: (produtos) => {
+
+          console.log(
+            'Produtos recebidos do FastAPI:',
+            produtos
+          );
+
+          this.produtos = produtos;
+
+        },
+
+        error: (err) => {
+
+          console.error(
+            'Erro ao buscar produtos:',
+            err
+          );
+
+        }
+
+      });
+
+  }
+
+  adicionarAoCarrinho(produto: Produto): void {
 
     const produtoExistente = carrinho.find(
       item => item.produto === produto
@@ -30,8 +69,11 @@ export class ListaComponent {
     } else {
 
       carrinho.push({
+
         produto: produto,
+
         quantidade: 1
+
       });
 
     }
@@ -41,7 +83,9 @@ export class ListaComponent {
   }
 
   verCarrinho(): void {
+
     this.router.navigate(['/carrinho']);
+
   }
 
 }

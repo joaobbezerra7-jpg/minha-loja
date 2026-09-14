@@ -1,129 +1,73 @@
 
 import { Component } from '@angular/core';
-
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
-
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { produtos } from './produtos';
 
 import { SetorService } from '../../services/setor.service';
-
 import { Setor } from '../../models/setor';
+
+import { ProdutoService } from '../../services/produto-service';
 
 
 @Component({
-
   selector: 'app-produto',
-
   standalone: true,
-
   imports: [ReactiveFormsModule],
-
   templateUrl: './produto.html',
-
   styleUrls: ['./produto.css']
-
 })
-
-
 export class ProdutoComponent {
-
-  // DECLARA O FORMULÁRIO
 
   formularioProduto;
 
-
-  // ARMAZENA A FOTO SELECIONADA
-
   fotoPreview: string = '';
-
-
-  // ARMAZENA OS SETORES CADASTRADOS
 
   setores: Setor[] = [];
 
 
   constructor(
-
     private formBuilder: FormBuilder,
-
     private router: Router,
-
-    private setorService: SetorService
-
+    private setorService: SetorService,
+    private produtoService: ProdutoService
   ) {
-
-    // PEGA OS SETORES DO SERVIÇO
 
     this.setores = this.setorService.getSetores();
 
+    this.formularioProduto = this.formBuilder.group({
 
-    // CRIA O FORMULÁRIO
+      idsetor: [
+        '',
+        Validators.required
+      ],
 
-    this.formularioProduto =
+      produto: [
+        '',
+        Validators.required
+      ],
 
-      this.formBuilder.group({
+      descricao_produto: [
+        ''
+      ],
 
-        // SETOR DO PRODUTO
+      valor_unitario: [
+        '',
+        Validators.required
+      ],
 
-        idsetor: [
+      unidade: [
+        '',
+        Validators.required
+      ],
 
-          '',
+      estoque: [
+        '',
+        Validators.required
+      ]
 
-          Validators.required
-
-        ],
-
-        // NOME DO PRODUTO
-
-        produto: [
-
-          '',
-
-          Validators.required
-
-        ],
-
-        // DESCRIÇÃO DO PRODUTO
-
-        descricao_produto: [''],
-
-        // VALOR DO PRODUTO
-
-        valor_unitario: [
-
-          '',
-
-          Validators.required
-
-        ],
-
-        // UNIDADE DO PRODUTO
-
-        unidade: [
-
-          '',
-
-          Validators.required
-
-        ],
-
-        // QUANTIDADE EM ESTOQUE
-
-        estoque: [
-
-          '',
-
-          Validators.required
-
-        ]
-
-      });
+    });
 
   }
 
@@ -137,22 +81,16 @@ export class ProdutoComponent {
     const input =
       event.target as HTMLInputElement;
 
-
     if (
-
       input.files &&
-
       input.files.length > 0
-
     ) {
 
       const arquivo =
         input.files[0];
 
-
       const leitor =
         new FileReader();
-
 
       leitor.onload = () => {
 
@@ -160,7 +98,6 @@ export class ProdutoComponent {
           leitor.result as string;
 
       };
-
 
       leitor.readAsDataURL(arquivo);
 
@@ -175,96 +112,183 @@ export class ProdutoComponent {
 
   cadastrarProduto(): void {
 
-    // VERIFICA SE O FORMULÁRIO É VÁLIDO
+    // Verificar formulário
 
-    if (
+    if (this.formularioProduto.invalid) {
 
-      this.formularioProduto.invalid
-
-    ) {
-
-      this.formularioProduto
-        .markAllAsTouched();
+      this.formularioProduto.markAllAsTouched();
 
       return;
 
     }
 
 
-    // PEGA OS DADOS DO FORMULÁRIO
-
     const dados =
       this.formularioProduto.value;
 
 
-    // CRIA O PRODUTO
+    // =======================================================
+    // DADOS QUE SERÃO ENVIADOS PARA O FASTAPI
+    // =======================================================
 
     const novoProduto = {
-
-      idproduto:
-        produtos.length + 1,
 
       idsetor:
         Number(dados.idsetor),
 
       produto:
-        dados.produto,
+        dados.produto!,
 
       descricao_produto:
-        dados.descricao_produto,
+        dados.descricao_produto ?? '',
 
       valor_unitario:
         Number(dados.valor_unitario),
 
       unidade:
-        dados.unidade,
+        dados.unidade!,
 
       estoque:
-        Number(dados.estoque),
-
-      foto:
-        this.fotoPreview
+        Number(dados.estoque)
 
     };
 
 
-    // ADICIONA O PRODUTO À LISTA
-
-    produtos.push(novoProduto);
-
-
-    // MOSTRA OS DADOS NO CONSOLE
-
     console.log(
-      'Produto cadastrado:',
+      'Enviando produto para o FastAPI:',
       novoProduto
     );
 
 
-    console.log(
-      'Todos os produtos:',
-      produtos
-    );
+    // =======================================================
+    // ENVIAR PARA O BACKEND
+    // =======================================================
+
+    this.produtoService
+      .salvarProduto(novoProduto)
+      .subscribe({
+
+        // ===================================================
+        // SUCESSO
+        // ===================================================
+
+        next: (resposta) => {
+
+          console.log(
+            '================================='
+          );
+
+          console.log(
+            'RESPOSTA DO FASTAPI:'
+          );
+
+          console.log(
+            resposta
+          );
+
+          console.log(
+            '================================='
+          );
 
 
-    // LIMPA O FORMULÁRIO
+          // Limpar formulário
 
-    this.formularioProduto.reset();
-
-    this.fotoPreview = '';
+          this.formularioProduto.reset();
 
 
-    // MENSAGEM
+          // Limpar preview da foto
 
-    alert(
-      'Produto cadastrado com sucesso!'
-    );
+          this.fotoPreview = '';
+
+
+          alert(
+            'Produto cadastrado com sucesso!'
+          );
+
+        },
+
+
+        // ===================================================
+        // ERRO
+        // ===================================================
+
+        error: (err) => {
+
+          console.error(
+            '================================='
+          );
+
+          console.error(
+            'ERRO AO CADASTRAR PRODUTO'
+          );
+
+          console.error(
+            'Status:',
+            err.status
+          );
+
+          console.error(
+            'Erro:',
+            err.error
+          );
+
+          console.error(
+            '================================='
+          );
+
+
+          // Setor não encontrado
+
+          if (err.status === 404) {
+
+            alert(
+              'O setor selecionado não foi encontrado.'
+            );
+
+          }
+
+
+          // Dados inválidos
+
+          else if (err.status === 422) {
+
+            alert(
+              'Os dados do produto estão em formato inválido.'
+            );
+
+          }
+
+
+          // FastAPI indisponível
+
+          else if (err.status === 0) {
+
+            alert(
+              'Não foi possível conectar ao FastAPI.'
+            );
+
+          }
+
+
+          // Outros erros
+
+          else {
+
+            alert(
+              'Erro ao cadastrar o produto.'
+            );
+
+          }
+
+        }
+
+      });
 
   }
 
 
   // =========================================================
-  // IR PARA LISTA DE PRODUTOS
+  // VER PRODUTOS
   // =========================================================
 
   verProdutos(): void {

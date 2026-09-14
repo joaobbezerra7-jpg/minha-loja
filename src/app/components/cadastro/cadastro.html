@@ -97,6 +97,24 @@
 
             </div>
 
+            <!-- Sexo -->
+
+            <div class="form-group">
+                <label for="sexo">Sexo</label>
+              
+                <select id="sexo" formControlName="sexo">
+                  <option value="">Selecione</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
+                </select>
+              
+                @if (
+                  cadastroForm.get('sexo')?.touched &&
+                  cadastroForm.get('sexo')?.invalid
+                ) {
+                  <small>Informe o sexo.</small>
+                }
+              </div>
 
             <!-- TELEFONE -->
 

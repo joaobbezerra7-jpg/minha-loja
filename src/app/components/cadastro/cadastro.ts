@@ -20,10 +20,12 @@ import { ClienteService } from '../../services/cliente-service';
 @Component({
   selector: 'app-cadastro',
   standalone: true,
+
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
+
   templateUrl: './cadastro.html',
   styleUrl: './cadastro.css'
 })
@@ -77,6 +79,13 @@ export class CadastroComponent {
       ],
 
       data_nascimento: [
+        '',
+        [
+          Validators.required
+        ]
+      ],
+
+      sexo: [
         '',
         [
           Validators.required
@@ -196,6 +205,7 @@ export class CadastroComponent {
       .get<any>(
         `https://viacep.com.br/ws/${cepLimpo}/json/`
       )
+
       .subscribe({
 
         next: (dados: any) => {
@@ -251,7 +261,6 @@ export class CadastroComponent {
           console.log(
             'Endereço preenchido automaticamente.'
           );
-
         },
 
 
@@ -268,7 +277,6 @@ export class CadastroComponent {
 
           this.cepStatusClasse =
             'status-erro';
-
         }
 
       });
@@ -363,62 +371,7 @@ export class CadastroComponent {
 
 
     // =====================================================
-    // MOCK TEMPORÁRIO
-    // =====================================================
-
-    console.log(
-      '================================='
-    );
-
-    console.log(
-      'CADASTRO MOCKADO'
-    );
-
-    console.log(
-      'Dados recebidos pelo frontend:'
-    );
-
-    console.log(
-      payload
-    );
-
-    console.log(
-      '================================='
-    );
-
-
-    // Simula uma resposta bem-sucedida
-
-    setTimeout(() => {
-
-      this.loading = false;
-
-
-      this.successMessage =
-        'Cadastro realizado com sucesso!';
-
-
-      // Limpar formulário
-
-      this.cadastroForm.reset();
-
-      this.cepStatusMensagem = '';
-
-      this.cepStatusClasse = '';
-
-
-      // Ir para a loja
-
-      this.router.navigate([
-        '/loja'
-      ]);
-
-    }, 500);
-
-
-    /*
-    // =====================================================
-    // FUTURA INTEGRAÇÃO COM FASTAPI
+    // INTEGRAÇÃO COM FASTAPI
     // =====================================================
 
     this.clienteService
@@ -452,6 +405,11 @@ export class CadastroComponent {
 
 
           this.cadastroForm.reset();
+
+
+          this.cepStatusMensagem = '';
+
+          this.cepStatusClasse = '';
 
 
           this.router.navigate([
@@ -520,7 +478,6 @@ export class CadastroComponent {
         }
 
       });
-    */
 
   }
 
@@ -538,3 +495,4 @@ export class CadastroComponent {
   }
 
 }
+
