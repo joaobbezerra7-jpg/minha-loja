@@ -7,6 +7,7 @@ import { LojaComponent } from './components/loja/loja.component';
 import { CadastroComponent } from './components/cadastro/cadastro';
 import { SetorCadastroComponent } from './components/setor-cadastro/setor-cadastro.component';
 import { SetorListaComponent } from './components/setor-lista/setor-lista';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
 
 export const routes: Routes = [
   {
@@ -33,9 +34,14 @@ export const routes: Routes = [
     path: 'setor-cadastro',
     component: SetorCadastroComponent
   },
+
   {
     path: 'setor-lista',
     component: SetorListaComponent
+  },
+
+  { path: 'pedidos',
+   component: PedidosComponent 
   },
   {
     path: '',

@@ -1,0 +1,149 @@
+
+<div class="pedidos-container">
+
+  <h1>🧾 Meus Pedidos</h1>
+
+  @if (pedidos.length === 0) {
+
+    <div class="pedidos-vazio">
+
+      <h2>Nenhum pedido encontrado</h2>
+
+      <p>
+        Você ainda não realizou nenhum pedido.
+      </p>
+
+    </div>
+
+  } @else {
+
+    <div class="pedidos-lista">
+
+      @for (pedido of pedidos; track $index) {
+
+        <div class="pedido-card">
+
+          <!-- CABEÇALHO DO PEDIDO -->
+
+          <div class="pedido-cabecalho">
+
+            <div>
+
+              <h2>
+                Pedido #{{ pedido.idpedido }}
+              </h2>
+
+              <p>
+                Data: {{ pedido.data_pedido }}
+              </p>
+
+            </div>
+
+            <span class="pedido-status">
+
+              {{
+                pedido.status_pedido === 'A'
+                  ? 'Aberto'
+                  : pedido.status_pedido
+              }}
+
+            </span>
+
+          </div>
+
+
+          <!-- PRODUTOS DO PEDIDO -->
+
+          <div class="pedido-produtos">
+
+            <h3>
+              Produtos
+            </h3>
+
+            @if (pedido.produtos.length === 0) {
+
+              <p class="sem-produtos">
+                Este pedido não possui produtos.
+              </p>
+
+            } @else {
+
+              @for (item of pedido.produtos; track $index) {
+
+                <div class="produto-pedido">
+
+                  <div class="produto-pedido-info">
+
+                    <strong>
+                      Produto #{{ item.idproduto }}
+                    </strong>
+
+                    <span>
+                      Quantidade:
+                      {{ item.quantidade }}
+                    </span>
+
+                  </div>
+
+
+                  <div class="produto-pedido-valor">
+
+                    <span>
+                      R$
+                      {{
+                        formatarValor(
+                          item.valor_unitario
+                        )
+                      }}
+                      cada
+                    </span>
+
+                    <strong>
+                      R$
+                      {{
+                        formatarValor(
+                          calcularSubtotalItem(item)
+                        )
+                      }}
+                    </strong>
+
+                  </div>
+
+                </div>
+
+              }
+
+            }
+
+          </div>
+
+
+          <!-- TOTAL DO PEDIDO -->
+
+          <div class="pedido-total">
+
+            <span>
+              Total do pedido
+            </span>
+
+            <strong>
+              R$
+              {{
+                formatarValor(
+                  calcularTotal(pedido)
+                )
+              }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+</div>
+

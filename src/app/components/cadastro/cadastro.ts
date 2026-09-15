@@ -20,12 +20,10 @@ import { ClienteService } from '../../services/cliente-service';
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
-
   templateUrl: './cadastro.html',
   styleUrl: './cadastro.css'
 })
@@ -205,7 +203,6 @@ export class CadastroComponent {
       .get<any>(
         `https://viacep.com.br/ws/${cepLimpo}/json/`
       )
-
       .subscribe({
 
         next: (dados: any) => {
@@ -261,6 +258,7 @@ export class CadastroComponent {
           console.log(
             'Endereço preenchido automaticamente.'
           );
+
         },
 
 
@@ -277,6 +275,7 @@ export class CadastroComponent {
 
           this.cepStatusClasse =
             'status-erro';
+
         }
 
       });
@@ -395,6 +394,25 @@ export class CadastroComponent {
           console.log(
             '================================='
           );
+
+
+          // =================================================
+          // GUARDAR ID DA PESSOA
+          // =================================================
+
+          if (resposta?.idpessoa) {
+
+            localStorage.setItem(
+              'idpessoa',
+              resposta.idpessoa.toString()
+            );
+
+            console.log(
+              'ID da pessoa armazenado:',
+              resposta.idpessoa
+            );
+
+          }
 
 
           this.loading = false;

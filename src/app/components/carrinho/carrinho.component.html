@@ -1,20 +1,14 @@
 
 <div class="carrinho-container">
 
-  <h1>
-    🛒 Meu Carrinho
-  </h1>
+  <h1>🛒 Meu Carrinho</h1>
 
-
-  <!-- CARRINHO VAZIO -->
 
   @if (carrinho.length === 0) {
 
     <div class="carrinho-vazio">
 
-      <h2>
-        Seu carrinho está vazio
-      </h2>
+      <h2>Seu carrinho está vazio</h2>
 
       <p>
         Adicione produtos à sua compra para continuar.
@@ -31,9 +25,6 @@
 
   }
 
-
-  <!-- CARRINHO COM PRODUTOS -->
-
   @else {
 
     <div class="carrinho-lista">
@@ -45,8 +36,6 @@
 
         <div class="item-carrinho">
 
-
-          <!-- PRODUTO -->
 
           <div class="produto-info">
 
@@ -66,23 +55,18 @@
               </h3>
 
               <p>
-
                 R$
-
                 {{
-                  item.produto.valor_unitario
-                    .toFixed(2)
-                    .replace('.', ',')
+                  formatarValor(
+                    item.produto.valor_unitario
+                  )
                 }}
-
               </p>
 
             </div>
 
           </div>
 
-
-          <!-- QUANTIDADE -->
 
           <div class="quantidade">
 
@@ -93,11 +77,9 @@
               −
             </button>
 
-
             <span>
               {{ item.quantidade }}
             </span>
-
 
             <button
               type="button"
@@ -109,29 +91,20 @@
           </div>
 
 
-          <!-- SUBTOTAL -->
-
           <div class="item-subtotal">
 
             <strong>
-
               R$
-
               {{
-                (
+                formatarValor(
                   item.produto.valor_unitario *
                   item.quantidade
                 )
-                  .toFixed(2)
-                  .replace('.', ',')
               }}
-
             </strong>
 
           </div>
 
-
-          <!-- REMOVER -->
 
           <button
             type="button"
@@ -148,8 +121,6 @@
     </div>
 
 
-    <!-- RESUMO DO CARRINHO -->
-
     <div class="resumo-carrinho">
 
       <h2>
@@ -164,15 +135,10 @@
         </span>
 
         <strong>
-
           R$
-
           {{
-            subtotal()
-              .toFixed(2)
-              .replace('.', ',')
+            formatarValor(subtotal())
           }}
-
         </strong>
 
       </div>
@@ -185,21 +151,14 @@
         </span>
 
         <strong>
-
           R$
-
           {{
-            total()
-              .toFixed(2)
-              .replace('.', ',')
+            formatarValor(total())
           }}
-
         </strong>
 
       </div>
 
-
-      <!-- FINALIZAR PEDIDO -->
 
       <button
         type="button"
